@@ -43,11 +43,7 @@ public class TMDBIntegrator {
 
         genreService.setGenresMap(
                 tmdbService.getGenres().stream()
-                        .collect(
-                                Collectors.toMap(
-                                        TMDBGenreDTO::getId,
-                                        TMDBGenreDTO::getName
-                                ))
+                        .collect(Collectors.toMap(TMDBGenreDTO::getId, TMDBGenreDTO::getName))
         );
 
         log.info("Genres set successfully initialized");
