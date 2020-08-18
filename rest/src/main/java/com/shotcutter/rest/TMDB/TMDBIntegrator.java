@@ -63,6 +63,7 @@ public class TMDBIntegrator {
     )
     protected void loadMoviesChunk() {
         if (genreService.getGenresMap() == null) {
+            log.info("Waiting for genres initialization");
             return;
         }
 
