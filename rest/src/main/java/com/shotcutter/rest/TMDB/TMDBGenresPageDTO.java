@@ -1,10 +1,10 @@
 package com.shotcutter.rest.TMDB;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class TMDBGenresPageDTO {
-    @Getter @Setter private List<TMDBGenreDTO> genres;
+    private List<TMDBGenreDTO> genres;
 }

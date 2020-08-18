@@ -1,13 +1,13 @@
 package com.shotcutter.rest.TMDB;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class TMDBPage<T> {
-    @Getter @Setter private Integer page;
-    @Getter @Setter private List<T> results;
+    private Integer page;
+    private List<T> results;
 
     private Integer total_results;
     private Integer total_pages;

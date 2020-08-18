@@ -3,27 +3,27 @@ package com.shotcutter.rest.movie;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.Set;
 
+@Data
 @Builder
 @Document(collection = "movies")
 public class Movie {
     @Id
-    @Getter @Setter private Long id;
-    @Getter @Setter private Boolean adult;
-    @Getter @Setter private Long voteCount;
-    @Getter @Setter private Double voteAverage;
-    @Getter @Setter private Long popularity;
-    @Getter @Setter private Set<String> genres;
-    @Getter @Setter private Date releaseDate;
-    @Getter @Setter private String posterPath;
-    @Getter @Setter private String overview;
-    @Getter @Setter private String originalTitle;
-    @Getter @Setter private String originalLanguage;
-    @Getter @Setter private String title;
-    @Getter @Setter private String backdropPath;
+    private Long id;
+    private Boolean adult;
+    private Long voteCount;
+    private Double voteAverage;
+    private Long popularity;
+    private Set<String> genres;
+    private Date releaseDate;
+    private String posterPath;
+    private String overview;
+    private String originalTitle;
+    private String originalLanguage;
+    private String title;
+    private String backdropPath;
 }

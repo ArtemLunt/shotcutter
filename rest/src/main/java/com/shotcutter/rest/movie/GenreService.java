@@ -1,12 +1,12 @@
 package com.shotcutter.rest.movie;
 
 import org.springframework.stereotype.Service;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Map;
 
+@Data
 @Service
 public class GenreService {
-    @Getter @Setter private Map<Integer, String> genresMap;
+    private Map<Integer, String> genresMap;
 }

@@ -2,8 +2,7 @@ package com.shotcutter.rest.shared;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -12,10 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class ConverterService {
-    Logger logger = LoggerFactory.getLogger(ConverterService.class);
-
     Map<Class, Map<Class, Converter>> convertersTree;
 
     ConverterService(Set<Converter> converters) {
@@ -28,7 +26,7 @@ public class ConverterService {
             convertersTree.get(((Class) convertionTypes[0])).put((Class) convertionTypes[1], converter);
         });
 
-        logger.info("Converters map successfully initialized");
+        log.info("Converters map successfully initialized");
     }
 
     public <Original, Target> Optional<Target> convertTo(Original item, Class<Target> targetClass) {

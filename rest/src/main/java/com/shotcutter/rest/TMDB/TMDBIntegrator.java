@@ -1,7 +1,6 @@
 package com.shotcutter.rest.TMDB;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Async;
@@ -10,18 +9,15 @@ import com.shotcutter.rest.movie.MovieRepository;
 import org.springframework.stereotype.Component;
 import com.shotcutter.rest.movie.GenreService;
 import com.shotcutter.rest.movie.Movie;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
-@EnableScheduling
 @ConditionalOnProperty(value = "tmdb.integration.init", matchIfMissing = false)
 public class TMDBIntegrator {
-    private Logger logger;
-
     @Autowired private ConverterService converterService;
     @Autowired private GenreService genreService;
     @Autowired private TMDBService tmdbService;
@@ -32,8 +28,6 @@ public class TMDBIntegrator {
     private int currentPage;
 
     TMDBIntegrator(MovieRepository movieRepository) {
-        logger = LoggerFactory.getLogger(TMDBIntegrator.class);
-
         pageSize = 20;
         currentPage = ((int) movieRepository.count()) / pageSize;
     }
@@ -45,7 +39,7 @@ public class TMDBIntegrator {
     @Async
     @PostConstruct
     protected void initializeGenresSet() {
-        logger.info("Initialization with the TMDB service started");
+        log.info("Initialization with the TMDB service started");
 
         genreService.setGenresMap(
                 tmdbService.getGenres().stream()
@@ -56,7 +50,7 @@ public class TMDBIntegrator {
                                 ))
         );
 
-        logger.info("Genres set successfully initialized");
+        log.info("Genres set successfully initialized");
     }
 
     /**
@@ -80,6 +74,6 @@ public class TMDBIntegrator {
                         .collect(Collectors.toList())
         );
 
-        logger.info("Movies chunk successfully loaded");
+        log.info("Movies chunk successfully loaded");
     }
 }

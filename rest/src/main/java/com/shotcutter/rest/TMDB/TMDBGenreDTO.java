@@ -1,9 +1,9 @@
 package com.shotcutter.rest.TMDB;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 public class TMDBGenreDTO {
-    @Getter @Setter private Integer id;
-    @Getter @Setter private String name;
+    private Integer id;
+    private String name;
 }
