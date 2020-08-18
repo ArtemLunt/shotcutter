@@ -69,7 +69,7 @@ public class TMDBIntegrator {
         movieRepository.saveAll(
                 tmdbService.getPopularMovies(currentPage++)
                         .getResults()
-                        .parallelStream()
+                        .stream()
                         .map(tmdbMovieDTO -> converterService.convertTo(tmdbMovieDTO, Movie.class).get())
                         .collect(Collectors.toList())
         );
