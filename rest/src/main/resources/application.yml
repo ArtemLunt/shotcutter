@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      host: ${DB_HOST}
+      authentication-database: ${DB_AUTH_DB}
+      database: ${DB_DB_NAME}
+tmdb:
+  integration:
+    init: ${TMDB_INTEGRATION_INIT}
+    delay: ${TMDB_INTEGRATION_DELAY}
