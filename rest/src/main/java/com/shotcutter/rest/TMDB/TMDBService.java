@@ -8,9 +8,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpMethod;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Set;
+import java.util.Arrays;
 
 @Service
 public class TMDBService {
@@ -19,7 +18,7 @@ public class TMDBService {
 
     TMDBService(
             RestTemplateBuilder restTemplateBuilder,
-            @Value("${TMDB_API_KEY}") String apiKey
+            @Value("${tmdb.api-key}") String apiKey
     ) {
         restTemplate = restTemplateBuilder.build();
         restTemplate.setInterceptors(Arrays.asList(

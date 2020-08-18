@@ -7,6 +7,7 @@ spring:
       authentication-database: ${DB_AUTH_DB}
       database: ${DB_DB_NAME}
 tmdb:
+  api-key: ${TMDB_API_KEY}
   integration:
     init: ${TMDB_INTEGRATION_INIT}
     delay: ${TMDB_INTEGRATION_DELAY}
