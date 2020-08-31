@@ -1,8 +1,9 @@
 package com.shotcutter.rest.TMDB;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import com.shotcutter.rest.shared.ConverterService;
 import com.shotcutter.rest.movie.MovieRepository;
@@ -11,23 +12,32 @@ import com.shotcutter.rest.movie.GenreService;
 import com.shotcutter.rest.movie.Movie;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.PostConstruct;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 @ConditionalOnProperty(value = "tmdb.integration.init", matchIfMissing = false)
 public class TMDBIntegrator {
-    @Autowired private ConverterService converterService;
-    @Autowired private GenreService genreService;
-    @Autowired private TMDBService tmdbService;
+    private ConverterService converterService;
+    private GenreService genreService;
+    private TMDBService tmdbService;
 
-    @Autowired private MovieRepository movieRepository;
+    private MovieRepository movieRepository;
 
     private final int pageSize;
     private int currentPage;
 
-    TMDBIntegrator(MovieRepository movieRepository) {
+    TMDBIntegrator(
+            ConverterService converterService,
+            GenreService genreService,
+            TMDBService tmdbService,
+            MovieRepository movieRepository
+    ) {
+        this.converterService = converterService;
+        this.genreService = genreService;
+        this.tmdbService = tmdbService;
+        this.movieRepository = movieRepository;
+
         pageSize = 20;
         currentPage = ((int) movieRepository.count()) / pageSize;
     }
@@ -36,9 +46,8 @@ public class TMDBIntegrator {
      * Initializes genres set.
      * Also initializes a genre map for simpler access to genres by id
      */
-    @Async
-    @PostConstruct
-    protected void initializeGenresSet() {
+    @EventListener(ApplicationReadyEvent.class)
+    public void initializeGenresSet() {
         log.info("Initialization with the TMDB service started");
 
         genreService.setGenresMap(
@@ -52,12 +61,12 @@ public class TMDBIntegrator {
     /**
      * Loads movies chunk
      */
-    @Async
     @Scheduled(
             fixedDelayString = "${tmdb.integration.delay}",
             initialDelayString = "${tmdb.integration.delay}"
     )
-    protected void loadMoviesChunk() {
+    @Async(value = "tmdb-integration")
+    public void loadMoviesChunk() {
         if (genreService.getGenresMap() == null) {
             log.info("Waiting for genres initialization");
             return;

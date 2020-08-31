@@ -1,6 +1,5 @@
 package com.shotcutter.rest.TMDB;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import com.shotcutter.rest.movie.GenreService;
@@ -10,8 +9,11 @@ import java.util.stream.Collectors;
 
 @Component
 public class TMDBMovieDTOMovieConverter implements Converter<TMDBMovieDTO, Movie> {
-    @Autowired
     private GenreService genreService;
+
+    TMDBMovieDTOMovieConverter(GenreService genreService) {
+        this.genreService = genreService;
+    }
 
     @Override
     public Movie convert(TMDBMovieDTO tmdbMovieDTO) {
