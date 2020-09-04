@@ -13,12 +13,13 @@ import java.util.Arrays;
 
 @Service
 public class TMDBService {
-    private final static String BASE_URL = "https://api.themoviedb.org/3";
+    @Value("${tmdb.api.base-url}")
+    private String BASE_URL;
     private RestTemplate restTemplate;
 
     TMDBService(
             RestTemplateBuilder restTemplateBuilder,
-            @Value("${tmdb.api-key}") String apiKey
+            @Value("${tmdb.api.key}") String apiKey
     ) {
         restTemplate = restTemplateBuilder.build();
         restTemplate.setInterceptors(Arrays.asList(
