@@ -1,8 +1,8 @@
-package com.shotcutter.rest.shared;
+package com.shotcutter.library.converter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -34,7 +34,7 @@ public class ConverterService {
                 .map(converter -> ((Converter<Original, Target>)converter).convert(item));
     }
 
-    <Original, Target> Optional<Converter<Original, Target>> getConverter(
+    public <Original, Target> Optional<Converter<Original, Target>> getConverter(
             Class<Original> originalClass,
             Class<Target> targetClass
     ) {
@@ -43,5 +43,19 @@ public class ConverterService {
                         .map(convertersBranch -> convertersBranch.getOrDefault(targetClass, null))
                         .get()
         );
+    }
+
+    public <Original, Target> boolean hasConverter(
+            Class<Original> originalClass,
+            Class<Target> targetClass
+    ) {
+        return this.getConverter(originalClass, targetClass).isPresent();
+    }
+
+    public <Original, Target> boolean hasTwoWayConverter(
+            Class<Original> originalClass,
+            Class<Target> targetClass
+    ) {
+        return hasConverter(originalClass, targetClass) && hasConverter(targetClass, originalClass);
     }
 }
