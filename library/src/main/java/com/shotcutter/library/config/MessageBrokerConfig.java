@@ -1,8 +1,7 @@
 package com.shotcutter.library.config;
 
-
 import com.shotcutter.library.messaging.ShotcutterMessageRoutingConstant;
-import com.shotcutter.library.user.UserDTO;
+import com.shotcutter.library.user.User;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.DefaultClassMapper;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -19,6 +18,12 @@ import java.util.Map;
 public class MessageBrokerConfig {
 
     @Bean
+    @Qualifier(ShotcutterMessageRoutingConstant.User.FIND_BY_ID)
+    public Queue findUserByIdQueue() {
+        return new Queue(ShotcutterMessageRoutingConstant.User.FIND_BY_ID, false);
+    }
+
+    @Bean
     @Qualifier(ShotcutterMessageRoutingConstant.User.FIND_BY_EMAIL)
     public Queue findUserByEmailQueue() {
         return new Queue(ShotcutterMessageRoutingConstant.User.FIND_BY_EMAIL, false);
@@ -28,6 +33,12 @@ public class MessageBrokerConfig {
     @Qualifier(ShotcutterMessageRoutingConstant.User.REGISTRATION)
     public Queue userRegistrationQueue() {
         return new Queue(ShotcutterMessageRoutingConstant.User.REGISTRATION, false);
+    }
+
+    @Bean
+    @Qualifier(ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN)
+    public Queue getIdByTokenQueue() {
+        return new Queue(ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN, false);
     }
 
     @Bean
@@ -48,7 +59,7 @@ public class MessageBrokerConfig {
     public DefaultClassMapper classMapper() {
         DefaultClassMapper classMapper = new DefaultClassMapper();
         Map<String, Class<?>> idClassMapping = Map.ofEntries(
-                Map.entry("com.shotcutter.library.user.UserDTO", UserDTO.class)
+                Map.entry(User.class.getCanonicalName(), User.class)
         );
         classMapper.setIdClassMapping(idClassMapping);
         return classMapper;

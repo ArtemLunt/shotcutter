@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      username: ${DB_USERNAME:mongo}
+      password: ${DB_PASSWORD:root}
+      host: ${DB_HOST:localhost}
+      authentication-database: ${DB_AUTH_DB:admin}
+      database: ${DB_DB_NAME:shotcutter}
+tmdb:
+  api:
+    key: ${TMDB_API_KEY}
+  integration:
+    init: ${TMDB_INTEGRATION_INIT:false}
+    delay: ${TMDB_INTEGRATION_DELAY:10000}

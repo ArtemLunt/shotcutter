@@ -1,9 +1,12 @@
 server:
   port: 8081
+shotcutter:
+  encryption:
+    private: ${SHOTCUTTER_ENCRYPTION_PRIVATE}
 spring:
   rabbitmq:
-    host: ${RABBIT_HOST}
-    port: ${RABBIT_PORT}
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
   security:
     oauth2:
       client:

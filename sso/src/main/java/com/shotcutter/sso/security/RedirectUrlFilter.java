@@ -28,12 +28,29 @@ public class RedirectUrlFilter implements Filter {
 
         try {
             redirectUrl = Optional
-                    // by design, there should be get parameter with redirect uri
                     .ofNullable(servletRequest.getParameter(SecurityRequestParam.REDIRECT_TO.toString()))
-                    // in other case, we simply redirecting our client back to the
-                    .orElse(((HttpServletRequest) servletRequest).getHeader(HttpHeaders.REFERER));
+                    /*.or(() -> {
+                        String sessionValue;
+                        try {
+                            sessionValue = ((HttpServletRequest) servletRequest)
+                                    .getSession()
+                                    .getAttribute(SecurityRequestParam.REDIRECT_TO.toString())
+                                    .toString();
+                        } catch (Exception e){
+                            return Optional.of(null);
+                        }
+
+                        return Optional.ofNullable(sessionValue);
+                    })*/
+                    .or(() -> {
+                        var referer = ((HttpServletRequest) servletRequest).getHeader(HttpHeaders.REFERER);
+                        return Optional.ofNullable(referer);
+                    })
+                    .get();
+
         } catch (Exception e) {
             filterChain.doFilter(servletRequest, servletResponse);
+            return;
         }
 
         if (redirectUrl != null) {

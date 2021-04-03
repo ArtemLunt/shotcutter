@@ -1,0 +1,54 @@
+@import 'mixins/alignment';
+
+.sc-auth {
+  height: 100vh;
+  width: 100vw;
+  @include flex-center;
+
+  &__container {
+    display: flex;
+    width: 250px;
+    height: 200px;
+
+    ::ng-deep {
+      .mat-card {
+        flex: 1;
+
+        &-content {
+          height: 100%;
+        }
+      }
+    }
+
+    &__providers {
+      height: 100%;
+      @include flex-center;
+      flex-direction: column;
+    }
+  }
+
+  &__provider {
+    display: flex;
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+
+    &__content {
+      @include flex-center;
+    }
+
+    &__button {
+      width: 135px;
+      height: 50px;
+    }
+
+    &__icon {
+      height: 25px;
+    }
+
+    &__title {
+      margin-left: 5px;
+    }
+  }
+}

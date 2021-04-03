@@ -6,11 +6,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, Long> {
+public interface UserRepository extends MongoRepository<UserEntity, Long> {
 
-    Optional<User> findByEmail(String email);
-
-    @Override
-    User save(User s);
+    Optional<UserEntity> findById(String id);
+    Optional<UserEntity> findByEmail(String email);
 
 }

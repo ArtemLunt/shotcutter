@@ -13,16 +13,24 @@ import org.springframework.amqp.core.Queue;
 public class MessageBrokerRoutingConfig {
 
     @Bean
-    DirectExchange userExchange() {
+    public DirectExchange userExchange() {
         return new DirectExchange(ShotcutterMessageRoutingConstant.User.EXCHANGE_NAME);
     }
 
     @Bean
-    Binding binding(@Qualifier(ShotcutterMessageRoutingConstant.User.FIND_BY_EMAIL) Queue userQueue) {
+    Binding findByEmailBinding(@Qualifier(ShotcutterMessageRoutingConstant.User.FIND_BY_EMAIL) Queue userQueue) {
         return BindingBuilder
                 .bind(userQueue)
                 .to(userExchange())
                 .with(ShotcutterMessageRoutingConstant.User.FIND_BY_EMAIL);
+    }
+
+    @Bean
+    Binding findByIdBinding(@Qualifier(ShotcutterMessageRoutingConstant.User.FIND_BY_ID) Queue userQueue) {
+        return BindingBuilder
+                .bind(userQueue)
+                .to(userExchange())
+                .with(ShotcutterMessageRoutingConstant.User.FIND_BY_ID);
     }
 
     @Bean

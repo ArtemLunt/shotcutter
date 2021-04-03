@@ -1,0 +1,20 @@
+<div class="sc-auth">
+  <div class="sc-auth__container">
+    <mat-card>
+      <mat-card-content>
+
+        <div class="sc-auth__container__providers">
+          <a *ngFor="let provider of authProviders"
+             class="sc-auth__provider"
+             [href]="provider.url">
+            <button class="sc-auth__provider__button"
+                    mat-raised-button>
+              <img class="sc-auth__provider__icon" [src]="provider.icon">
+            </button>
+          </a>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -44,18 +44,4 @@ public class ConverterService {
                         .get()
         );
     }
-
-    public <Original, Target> boolean hasConverter(
-            Class<Original> originalClass,
-            Class<Target> targetClass
-    ) {
-        return this.getConverter(originalClass, targetClass).isPresent();
-    }
-
-    public <Original, Target> boolean hasTwoWayConverter(
-            Class<Original> originalClass,
-            Class<Target> targetClass
-    ) {
-        return hasConverter(originalClass, targetClass) && hasConverter(targetClass, originalClass);
-    }
 }

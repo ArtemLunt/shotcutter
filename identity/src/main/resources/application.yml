@@ -4,12 +4,12 @@ spring:
   main:
     allow-bean-definition-overriding: true
   rabbitmq:
-    host: ${RABBIT_HOST}
-    port: ${RABBIT_PORT}
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
   data:
     mongodb:
-      username: ${DB_USERNAME}
-      password: ${DB_PASSWORD}
-      host: ${DB_HOST}
-      authentication-database: ${DB_AUTH_DB}
-      database: ${DB_DB_NAME}
+      username: ${DB_USERNAME:mongo}
+      password: ${DB_PASSWORD:root}
+      host: ${DB_HOST:localhost}
+      authentication-database: ${DB_AUTH_DB:admin}
+      database: ${DB_DB_NAME:identity}

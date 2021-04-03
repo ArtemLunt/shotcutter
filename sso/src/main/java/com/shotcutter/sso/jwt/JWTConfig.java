@@ -5,15 +5,16 @@ import com.shotcutter.sso.shared.constant.EnvironmentVariable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class JWTConfig {
 
     @Value(EnvironmentVariable.ENCRYPTION_SECRET)
     private String secret;
 
     @Bean
-    JWTService jwtService() {
+    public JWTService jwtService() {
         return new JWTService(secret);
     }
 

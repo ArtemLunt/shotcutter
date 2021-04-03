@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan("com.shotcutter.library")
 @ComponentScan("com.shotcutter.identity")
+@ComponentScan("com.shotcutter.securitystarter")
 public class IdentityApplication {
 
     public static void main(String[] args) {

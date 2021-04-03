@@ -2,7 +2,7 @@ package com.shotcutter.sso.security;
 
 public enum SessionAttributeKey {
 
-    REDIRECT_URL("redirectUrl");
+    REDIRECT_URL("redirect_uri");
 
     private final String title;
 
