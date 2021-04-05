@@ -1,0 +1,10 @@
+.sc-details-menu {
+  display: flex;
+  flex-direction: column;
+
+  &__bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -1,5 +1,5 @@
+import {State, Action, StateContext, NgxsOnInit, Selector} from '@ngxs/store';
 import {LoadCurrentUserAction} from '@sc/user/state/user.actions';
-import {State, Action, StateContext} from '@ngxs/store';
 import {UserService} from '@sc/user/user.service';
 import {IUser} from '@sc/user/user.interface';
 import {Injectable} from '@angular/core';
@@ -17,11 +17,18 @@ export class UserStateModel {
   }
 })
 @Injectable()
-export class UserState {
+export class UserState implements NgxsOnInit {
 
-  constructor(
-    private _userService: UserService
-  ) {
+  @Selector()
+  static currentUser(state: UserStateModel): IUser {
+    return state?.currentUser;
+  }
+
+  constructor(private _userService: UserService) {
+  }
+
+  ngxsOnInit(ctx?: StateContext<any>): void {
+    ctx.dispatch(new LoadCurrentUserAction());
   }
 
   @Action(LoadCurrentUserAction)

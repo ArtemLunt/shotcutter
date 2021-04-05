@@ -1,6 +1,6 @@
 import {CanActivate, ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthResultQueryParamKey, AuthStatus, IAuthResult} from '@sc/auth/auth-result.interface';
-import {AuthenticationService} from '@sc/auth/authentication.service';
+import {AuthFacadeService} from '@sc/auth/auth-facade.service';
 import {TokenService} from '@sc/auth/token.service';
 import {Injectable} from '@angular/core';
 import {map} from 'rxjs/operators';
@@ -9,10 +9,10 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationPageGuard implements CanActivate {
+export class AuthPageGuard implements CanActivate {
 
   constructor(
-    private readonly _authService: AuthenticationService,
+    private readonly _authService: AuthFacadeService,
     private readonly _tokenService: TokenService,
     private readonly _router: Router
   ) {

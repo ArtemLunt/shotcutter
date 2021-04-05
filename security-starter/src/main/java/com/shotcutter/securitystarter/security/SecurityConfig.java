@@ -4,16 +4,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.AuthenticationFilter;
-import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.*;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //private AuthenticationFilterRr authenticationFilter;
     private JWTAuthManager authManager;
     private JWTAuthConverter authConverter;
 
@@ -24,15 +21,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .addFilterAt(new AuthenticationFilter(authManager, authConverter),
-                             UsernamePasswordAuthenticationFilter.class)
-                .formLogin().successHandler(new SimpleUrlAuthenticationSuccessHandler())
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(new Http403ForbiddenEntryPoint());
+        http
+                .addFilterBefore(authenticationFilter(), BasicAuthenticationFilter.class)
+                .authorizeRequests()
+                .anyRequest().authenticated();
+    }
+
+    private AuthenticationFilter authenticationFilter() {
+        var filter = new AuthenticationFilter(authManager, authConverter);
+        filter.setSuccessHandler(authSuccessHandler());
+
+        return filter;
+    }
+
+    private AuthenticationSuccessHandler authSuccessHandler() {
+        var successHandler = new SimpleUrlAuthenticationSuccessHandler();
+        successHandler.setRedirectStrategy(new RedirectStrategyImpl.NoRedirectStrategy());
+
+        return successHandler;
     }
 
 }

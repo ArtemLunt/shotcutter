@@ -5,13 +5,17 @@ import {Observable, of} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthFacadeService {
 
   constructor(private readonly _tokenService: TokenService) {
   }
 
   isAuthenticated(): Observable<boolean> {
     return of(this._tokenService.hasToken());
+  }
+
+  removeToken(): void {
+    this._tokenService.removeToken();
   }
 
 }

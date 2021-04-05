@@ -28,24 +28,18 @@ public class JWTAuthConverter implements AuthenticationConverter {
                 ? Stream.empty()
                 : Arrays.stream(httpServletRequest.getCookies());
 
-        User authenticatedUser = cookies
+        return cookies
                 .filter(cookie -> cookie.getName().equals(CookieKeys.ACCESS_TOKEN.toString()))
                 .findFirst()
                 .map(Cookie::getValue)
-                .or(() -> Optional.ofNullable(httpServletRequest.getHeader(CookieKeys.ACCESS_TOKEN.toString())))
-                // if there's an token cookie - we should retrieve the user for this token
+                // if there's a token cookie - we should retrieve the user for this token
                 .flatMap(token -> Optional.ofNullable((User) rabbitTemplate.convertSendAndReceive(
                         ShotcutterMessageRoutingConstant.Authentication.EXCHANGE_NAME,
                         ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN,
                         token
                 )))
+                .map(JWTPrincipal::new)
                 .orElse(null);
-
-        if (authenticatedUser == null) {
-            return null;
-        }
-
-        return new JWTPrincipal(authenticatedUser);
     }
 
 }

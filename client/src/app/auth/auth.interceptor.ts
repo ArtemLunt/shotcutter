@@ -1,34 +1,35 @@
-import {TokenService} from '@sc/auth/token.service';
-import {HttpHeaderKey} from '@sc/shared/enums';
-import {environment} from '@sc/environments';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {AuthFacadeService} from '@sc/auth/auth-facade.service';
+import { Injectable } from '@angular/core';
+import {catchError} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {EMPTY, Observable} from 'rxjs';
 import {
   HttpInterceptor,
-  HttpHandler,
   HttpRequest,
+  HttpHandler,
   HttpEvent,
 } from '@angular/common/http';
-import {CookieKey} from '@sc/auth/cookie-key.enum';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private readonly _tokenService: TokenService) {
+  constructor(
+    private _authService: AuthFacadeService,
+    private _router: Router
+  ) {}
+
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    return next.handle(request).pipe(catchError(this._handleError.bind(this)));
   }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    /*if (!environment.local) {
-      return next.handle(request);
-    }*/
+  private _handleError(): Observable<any> {
+    this._authService.removeToken();
+    this._router.navigate(['/auth']);
 
-    const updatedRequest = request.clone({
-      headers: request.headers
-        .append(HttpHeaderKey.Authorization, this._tokenService.getToken()),
-      withCredentials: true
-    });
-
-    return next.handle(updatedRequest);
+    return EMPTY;
   }
 
 }

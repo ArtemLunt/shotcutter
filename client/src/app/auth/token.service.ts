@@ -19,4 +19,8 @@ export class TokenService {
     Cookies.set(CookieKey.AccessToken, token);
   }
 
+  removeToken(): void {
+    Cookies.remove(CookieKey.AccessToken);
+  }
+
 }
