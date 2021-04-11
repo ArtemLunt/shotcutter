@@ -6,10 +6,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 import java.util.Collections;
-import java.io.Serializable;
 import java.util.Date;
 
-public class JWTService implements Serializable {
+public class JWTService {
 
     private String encryptionSecret;
 

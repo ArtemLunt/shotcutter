@@ -1,6 +1,5 @@
 package com.shotcutter.sso.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -9,11 +8,13 @@ import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationF
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    RedirectUrlFilter redirectUrlFilter;
+    private RedirectUrlFilter redirectUrlFilter;
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    @Autowired
-    AuthenticationSuccessHandler authenticationSuccessHandler;
+    public SecurityConfig(RedirectUrlFilter redirectUrlFilter, AuthenticationSuccessHandler authenticationSuccessHandler) {
+        this.redirectUrlFilter = redirectUrlFilter;
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -29,19 +29,6 @@ public class RedirectUrlFilter implements Filter {
         try {
             redirectUrl = Optional
                     .ofNullable(servletRequest.getParameter(SecurityRequestParam.REDIRECT_TO.toString()))
-                    /*.or(() -> {
-                        String sessionValue;
-                        try {
-                            sessionValue = ((HttpServletRequest) servletRequest)
-                                    .getSession()
-                                    .getAttribute(SecurityRequestParam.REDIRECT_TO.toString())
-                                    .toString();
-                        } catch (Exception e){
-                            return Optional.of(null);
-                        }
-
-                        return Optional.ofNullable(sessionValue);
-                    })*/
                     .or(() -> {
                         var referer = ((HttpServletRequest) servletRequest).getHeader(HttpHeaders.REFERER);
                         return Optional.ofNullable(referer);
