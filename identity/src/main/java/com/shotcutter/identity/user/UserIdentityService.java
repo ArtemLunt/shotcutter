@@ -37,10 +37,4 @@ public class UserIdentityService {
                 .map(userRepository::save);
     }
 
-    public Optional<UserEntity> patch(String userId, UserPatch patchObject) {
-        return findById(userId)
-                .map(user -> user.withUsername(patchObject.getUsername()))
-                .map(userRepository::save);
-    }
-
 }
