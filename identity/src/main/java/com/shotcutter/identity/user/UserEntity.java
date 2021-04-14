@@ -1,15 +1,13 @@
 package com.shotcutter.identity.user;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Builder;
 
 @Data
 @Builder(builderMethodName = "userEntityBuilder")
+@With
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "users")

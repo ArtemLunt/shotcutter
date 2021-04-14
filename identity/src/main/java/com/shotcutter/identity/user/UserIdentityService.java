@@ -32,8 +32,15 @@ public class UserIdentityService {
     }
 
     public Optional<UserEntity> registerUser(User unregisteredUser) {
-        var user = converterService.convertTo(unregisteredUser, UserEntity.class).get();
-        return Optional.of(userRepository.save(user));
+        return converterService
+                .convertTo(unregisteredUser, UserEntity.class)
+                .map(userRepository::save);
+    }
+
+    public Optional<UserEntity> patch(String userId, UserPatch patchObject) {
+        return findById(userId)
+                .map(user -> user.withUsername(patchObject.getUsername()))
+                .map(userRepository::save);
     }
 
 }

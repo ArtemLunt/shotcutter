@@ -1,9 +1,8 @@
-package com.shotcutter.library.user;
+package com.shotcutter.identity.user;
 
-import lombok.AllArgsConstructor;
+import com.shotcutter.library.user.User;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder(builderMethodName = "userDTOBuilder")
