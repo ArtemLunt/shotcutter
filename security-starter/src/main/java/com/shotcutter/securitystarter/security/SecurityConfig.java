@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.*;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -11,12 +12,16 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private JWTAuthManager authManager;
-    private JWTAuthConverter authConverter;
+    private final JWTAuthManager authManager;
+    private final JWTAuthConverter authConverter;
+    private final RedirectStrategy redirectStrategy;
 
-    public SecurityConfig(JWTAuthManager authManager, JWTAuthConverter authConverter) {
+    public SecurityConfig(JWTAuthManager authManager,
+                          JWTAuthConverter authConverter,
+                          RedirectStrategy redirectStrategy) {
         this.authManager = authManager;
         this.authConverter = authConverter;
+        this.redirectStrategy = redirectStrategy;
     }
 
     @Override
@@ -36,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private AuthenticationSuccessHandler authSuccessHandler() {
         var successHandler = new SimpleUrlAuthenticationSuccessHandler();
-        successHandler.setRedirectStrategy(new RedirectStrategyImpl.NoRedirectStrategy());
+        successHandler.setRedirectStrategy(redirectStrategy);
 
         return successHandler;
     }

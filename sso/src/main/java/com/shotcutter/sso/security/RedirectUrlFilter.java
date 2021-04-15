@@ -33,7 +33,7 @@ public class RedirectUrlFilter implements Filter {
                         var referer = ((HttpServletRequest) servletRequest).getHeader(HttpHeaders.REFERER);
                         return Optional.ofNullable(referer);
                     })
-                    .get();
+                    .orElse(null);
         } catch (NullPointerException e) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
