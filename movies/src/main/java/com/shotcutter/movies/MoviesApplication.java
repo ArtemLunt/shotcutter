@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 @EnableScheduling
 @SpringBootApplication
 @ComponentScan("com.shotcutter.library")
+@ComponentScan("com.shotcutter.security-starter")
 @ComponentScan("com.shotcutter.movies")
 public class MoviesApplication {
 
