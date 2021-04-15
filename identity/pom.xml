@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.shotcutter</groupId>
             <artifactId>library</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>com.shotcutter</groupId>
             <artifactId>security-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

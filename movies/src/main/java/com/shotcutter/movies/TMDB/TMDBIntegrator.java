@@ -1,7 +1,6 @@
 package com.shotcutter.movies.TMDB;
 
 import com.shotcutter.library.converter.ConverterService;
-import com.shotcutter.movies.shared.constant.EnvironmentVariable;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-@ConditionalOnProperty(value = EnvironmentVariable.TMDB_INTEGRATION_INIT_KEY)
+@ConditionalOnProperty(value = "tmdb.integration.init")
 public class TMDBIntegrator {
     private ConverterService converterService;
     private GenreService genreService;
@@ -67,8 +66,8 @@ public class TMDBIntegrator {
      * Loads movies chunk
      */
     @Scheduled(
-            fixedDelayString = EnvironmentVariable.TMDB_INTEGRATION_DELAY,
-            initialDelayString = EnvironmentVariable.TMDB_INTEGRATION_DELAY
+            fixedDelayString = "${tmdb.integration.delay}",
+            initialDelayString = "${tmdb.integration.delay}"
     )
     @Async(value = "tmdb-integration")
     public void loadMoviesChunk() {

@@ -41,8 +41,6 @@ public class AuthenticationSuccessHandler
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication
     ) throws IOException {
-        //String baseRedirect;
-
         var principal = (DefaultOidcUser) authentication.getPrincipal();
         // if redirect url is presented - redirect to this url and attach the token as a get param
         Map<String, Object> attributes = principal.getAttributes();
@@ -73,7 +71,7 @@ public class AuthenticationSuccessHandler
 
         String redirectBase = httpServletRequest
                 .getSession()
-                .getAttribute(SessionAttributeKey.REDIRECT_URL.toString())
+                .getAttribute(SecurityRequestParam.REDIRECT_URL.toString())
                 .toString();
 
         String redirectUri = UriComponentsBuilder.fromHttpUrl(redirectBase)

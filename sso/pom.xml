@@ -59,7 +59,7 @@
 		<dependency>
 			<groupId>com.shotcutter</groupId>
 			<artifactId>library</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

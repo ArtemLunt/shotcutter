@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.time.chrono.IsoChronology;
 import java.util.Collection;
 
+// TODO: get rid of nulls
 public class JWTPrincipal implements Authentication {
 
     private User user;

@@ -1,6 +1,5 @@
 package com.shotcutter.movies.TMDB;
 
-import com.shotcutter.movies.shared.constant.EnvironmentVariable;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +18,7 @@ public class TMDBService {
 
     TMDBService(
             RestTemplateBuilder restTemplateBuilder,
-            @Value(EnvironmentVariable.TMDB_API_KEY) String apiKey
+            @Value("${tmdb.api.key}") String apiKey
     ) {
         restTemplate = restTemplateBuilder.build();
         restTemplate.setInterceptors(Arrays.asList(

@@ -28,21 +28,20 @@ public class RedirectUrlFilter implements Filter {
 
         try {
             redirectUrl = Optional
-                    .ofNullable(servletRequest.getParameter(SecurityRequestParam.REDIRECT_TO.toString()))
+                    .ofNullable(servletRequest.getParameter(SecurityRequestParam.REDIRECT_URL.toString()))
                     .or(() -> {
                         var referer = ((HttpServletRequest) servletRequest).getHeader(HttpHeaders.REFERER);
                         return Optional.ofNullable(referer);
                     })
                     .get();
-
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
         if (redirectUrl != null) {
             ((HttpServletRequest) servletRequest).getSession()
-                    .setAttribute(SessionAttributeKey.REDIRECT_URL.toString(), redirectUrl);
+                    .setAttribute(SecurityRequestParam.REDIRECT_URL.toString(), redirectUrl);
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
