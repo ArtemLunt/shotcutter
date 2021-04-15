@@ -2,21 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.4</version>
-		<relativePath/>
-	</parent>
+
 	<groupId>com.shotcutter</groupId>
 	<artifactId>security-starter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>security-starter</name>
-	<description>Demo project for Spring Boot</description>
-
-	<properties>
-		<java.version>14</java.version>
-	</properties>
+	<description>Security starter for Shotcutter movie services</description>
 
 	<dependencies>
 		<dependency>
@@ -25,16 +16,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.shotcutter</groupId>
-			<artifactId>library</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.shotcutter</groupId>
+			<artifactId>library</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -42,11 +32,23 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>2.3.3</version>
+				<version>2.4.4</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>14</source>
+					<target>14</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
