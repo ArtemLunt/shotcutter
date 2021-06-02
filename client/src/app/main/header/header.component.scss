@@ -1,0 +1,31 @@
+.sc-header {
+  position: relative;
+
+  &__logo {
+    font-weight: 200;
+    margin: 0;
+    outline: none;
+    cursor: pointer;
+    flex-basis: fit-content;
+  }
+
+  &__content {
+    display: flex;
+
+    &__section {
+      display: flex;
+      align-items: center;
+
+      &--right {
+        margin-left: auto;
+      }
+    }
+  }
+
+  &__details-menu {
+    position: absolute;
+    margin-top: 5px;
+    right: 16px;
+    width: 250px;
+  }
+}

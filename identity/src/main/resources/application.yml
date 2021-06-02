@@ -1,0 +1,15 @@
+server:
+  port: 8082
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+  data:
+    mongodb:
+      username: ${DB_USERNAME:mongo}
+      password: ${DB_PASSWORD:root}
+      host: ${DB_HOST:localhost}
+      authentication-database: ${DB_AUTH_DB:admin}
+      database: ${DB_DB_NAME:identity}

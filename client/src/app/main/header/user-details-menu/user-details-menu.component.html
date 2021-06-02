@@ -1,0 +1,17 @@
+<div class="sc-details-menu">
+  <mat-card>
+    <mat-card-header *ngIf="currentUser$ | async as currentUser">
+      <img mat-card-avatar [src]="currentUser.avatar">
+      <mat-card-title>{{currentUser.username}}</mat-card-title>
+      <mat-card-subtitle>{{currentUser.email}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="sc-details-menu__bottom">
+        <button mat-button (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

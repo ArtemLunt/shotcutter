@@ -1,0 +1,23 @@
+<div class="sc-header">
+  <mat-card>
+    <mat-card-content>
+      <div class="sc-header__content">
+        <div class=" sc-header__content__section sc-header__content__section--left">
+          <h2 class="sc-header__logo" routerLink="/">
+            Shotcutter
+          </h2>
+        </div>
+
+        <div class="sc-header__content__section sc-header__content__section--right">
+          <sc-user-info (click)="showDetailsMenu = !showDetailsMenu">
+          </sc-user-info>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="sc-header__details-menu" *ngIf="showDetailsMenu">
+    <sc-user-details-menu>
+    </sc-user-details-menu>
+  </div>
+</div>

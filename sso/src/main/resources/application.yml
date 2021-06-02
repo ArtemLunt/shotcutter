@@ -1,0 +1,28 @@
+server:
+  port: 8081
+shotcutter:
+  encryption:
+    private: ${SHOTCUTTER_ENCRYPTION_PRIVATE}
+spring:
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+          yandex:
+            client-id: ${YANDEX_CLIENT_ID}
+            client-secret: ${YANDEX_CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            client-name: yandex
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          yandex:
+            user-info-uri: https://login.yandex.ru/info
+            authorization-uri: https://oauth.yandex.ru/authorize
+            token-uri: https://oauth.yandex.ru/token
+            user-name-attribute: real_name

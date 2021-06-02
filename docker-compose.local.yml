@@ -15,5 +15,14 @@ services:
       - shotcutter-db:/data/db
       - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
+  shotcutter-message-broker:
+    image: rabbitmq:latest
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_USER: rabbit
+      RABBITMQ_PASSWORD: rabbit
+    ports:
+      - 5672:5672
+      - 15672:15672
 volumes:
   shotcutter-db:

@@ -1,0 +1,5 @@
+<div class="sc-user-info"
+     *ngIf="currentUser$ | async as currentUser">
+  <img class="sc-user-info__avatar"
+       [src]="currentUser.avatar">
+</div>
