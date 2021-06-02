@@ -1,10 +1,10 @@
-import {AuthGuard, AuthPageGuard} from '@sc/auth';
 import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard, AuthPageGuard} from '@sc/auth';
 import {NgModule} from '@angular/core';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     loadChildren: () => import('@sc/main').then(m => m.MainModule),
     canActivate: [AuthGuard]
   },
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'home'
   }
 ];
 

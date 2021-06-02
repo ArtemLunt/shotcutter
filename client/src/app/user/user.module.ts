@@ -1,4 +1,4 @@
-import {UserState} from '@sc/user/state';
+import {CurrentUserState} from '@sc/user/state';
 import {SharedModule} from '@sc/shared';
 import {NgModule} from '@angular/core';
 import {NgxsModule} from '@ngxs/store';
@@ -8,7 +8,7 @@ import {NgxsModule} from '@ngxs/store';
   imports: [
     SharedModule,
     NgxsModule.forFeature([
-      UserState
+      CurrentUserState
     ])
   ]
 })

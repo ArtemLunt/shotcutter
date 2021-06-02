@@ -1,0 +1,22 @@
+{
+  "name": "shotcutter",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtemLunt/shotcutter.git"
+  },
+  "author": "ArtemLunt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArtemLunt/shotcutter/issues"
+  },
+  "homepage": "https://github.com/ArtemLunt/shotcutter#readme",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "12.1.1",
+    "@commitlint/config-conventional": "12.1.1",
+    "husky": "^6.0.0"
+  }
+}

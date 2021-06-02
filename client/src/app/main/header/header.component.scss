@@ -1,28 +1,40 @@
+@import 'fonts';
+
 .sc-header {
   position: relative;
 
   &__logo {
+    font-family: $sc-logo-font;
+    font-size: 35px;
     font-weight: 200;
     margin: 0;
     outline: none;
     cursor: pointer;
     flex-basis: fit-content;
+    user-select: none;
   }
 
   &__content {
     display: flex;
+  }
 
-    &__section {
-      display: flex;
-      align-items: center;
+  &__section {
+    display: flex;
+    align-items: center;
 
-      &--right {
-        margin-left: auto;
+    &--right {
+      margin-left: auto;
+    }
+
+    &__item {
+      &:not(:last-child) {
+        margin-right: 10px;
       }
     }
   }
 
   &__details-menu {
+    z-index: 100;
     position: absolute;
     margin-top: 5px;
     right: 16px;

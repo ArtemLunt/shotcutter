@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class MessageBrokerRoutingConfig {
 
     @Bean
-    DirectExchange authExchange() {
+    public DirectExchange authExchange() {
         return new DirectExchange(ShotcutterMessageRoutingConstant.Authentication.EXCHANGE_NAME);
     }
 

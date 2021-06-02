@@ -7,11 +7,30 @@
     </mat-card-header>
 
     <mat-card-content>
-      <div class="sc-details-menu__bottom">
+      <div class="sc-details-menu__content">
+        <a class="sc-details-menu__section"
+           routerLink="./profile">
+          <button class="sc-details-menu__section__button"
+                  mat-button>
+
+            <span class="sc-details-menu__section__icon">
+              <mat-icon>
+                person
+              </mat-icon>
+            </span>
+
+            <span class="sc-details-menu__section__text">Profile</span>
+          </button>
+        </a>
+      </div>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <div class="sc-details-menu__footer">
         <button mat-button (click)="logout()">
           Logout
         </button>
       </div>
-    </mat-card-content>
+    </mat-card-footer>
   </mat-card>
 </div>

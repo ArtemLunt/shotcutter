@@ -1,5 +1,13 @@
-<div class="sc-user-info"
-     *ngIf="currentUser$ | async as currentUser">
-  <img class="sc-user-info__avatar"
-       [src]="currentUser.avatar">
+<div class="sc-user-info">
+  <ng-container *ngIf="currentUser$ | async as currentUser; else spinner">
+    <img class="sc-user-info__avatar"
+         mat-ripple
+         [src]="currentUser.avatar">
+  </ng-container>
+
+  <ng-template #spinner>
+    <mat-spinner [diameter]="32">
+    </mat-spinner>
+  </ng-template>
 </div>
+

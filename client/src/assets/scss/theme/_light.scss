@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+
+$sr-light-primary-color: #012168;
+
+$sr-light-primary: mat-palette($mat-deep-purple);
+$sr-light-accent:  mat-palette($mat-amber, A200, A100, A400);
+$sr-light-theme:   mat-light-theme((
+  color: (
+    primary: $sr-light-primary,
+    accent: $sr-light-accent,
+  )
+));
+
+@mixin sc-light-theme-config {
+  @include angular-material-theme($sr-light-theme);
+}
