@@ -16,10 +16,9 @@ public class TMDBApiInterceptor implements ClientHttpRequestInterceptor {
     private String apiKey;
 
     @Override
-    public ClientHttpResponse intercept(
-            HttpRequest request,
-            byte[] body,
-            ClientHttpRequestExecution execution
+    public ClientHttpResponse intercept(HttpRequest request,
+                                        byte[] body,
+                                        ClientHttpRequestExecution execution
     ) throws IOException {
         URI newUrl = UriComponentsBuilder.fromHttpUrl(request.getURI().toString())
                 .queryParam(PathVariable.API_KEY.toString(), apiKey)

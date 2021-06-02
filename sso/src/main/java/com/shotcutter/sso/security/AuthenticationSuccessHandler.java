@@ -22,8 +22,8 @@ import java.util.Map;
 public class AuthenticationSuccessHandler
         extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    private RabbitTemplate rabbitTemplate;
-    private JWTService jwtService;
+    private final RabbitTemplate rabbitTemplate;
+    private final JWTService jwtService;
 
     AuthenticationSuccessHandler(RabbitTemplate rabbitTemplate,
                                  JWTService jwtService) {

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class TMDBMovieDTOMovieConverter implements Converter<TMDBMovieDTO, Movie> {
-    private GenreService genreService;
+    private final GenreService genreService;
 
     TMDBMovieDTOMovieConverter(GenreService genreService) {
         this.genreService = genreService;

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserListener {
 
-    private UserIdentityService userIdentityService;
-    private ConverterService converterService;
+    private final UserIdentityService userIdentityService;
+    private final ConverterService converterService;
 
     public UserListener(UserIdentityService userIdentityService,
                         ConverterService converterService) {

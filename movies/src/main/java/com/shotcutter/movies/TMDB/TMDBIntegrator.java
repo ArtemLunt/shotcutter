@@ -18,20 +18,19 @@ import java.util.stream.Collectors;
 @Component
 @ConditionalOnProperty(value = "tmdb.integration.init")
 public class TMDBIntegrator {
-    private ConverterService converterService;
-    private GenreService genreService;
-    private TMDBService tmdbService;
+    private final ConverterService converterService;
+    private final GenreService genreService;
+    private final TMDBService tmdbService;
 
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     private final int pageSize;
     private int currentPage;
 
-    TMDBIntegrator(
-            ConverterService converterService,
-            GenreService genreService,
-            TMDBService tmdbService,
-            MovieRepository movieRepository
+    TMDBIntegrator(ConverterService converterService,
+                   GenreService genreService,
+                   TMDBService tmdbService,
+                   MovieRepository movieRepository
     ) {
         this.converterService = converterService;
         this.genreService = genreService;

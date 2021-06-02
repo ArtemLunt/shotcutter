@@ -13,7 +13,7 @@ import org.springframework.amqp.core.Queue;
 public class MessageBrokerRoutingConfig {
 
     @Bean
-    public DirectExchange userExchange() {
+    DirectExchange userExchange() {
         return new DirectExchange(ShotcutterMessageRoutingConstant.User.EXCHANGE_NAME);
     }
 
@@ -34,8 +34,8 @@ public class MessageBrokerRoutingConfig {
     }
 
     @Bean
-    Binding registrationBinding(@Qualifier(ShotcutterMessageRoutingConstant.User.REGISTRATION) Queue registrationQueue
-    ) {
+    Binding registrationBinding(
+            @Qualifier(ShotcutterMessageRoutingConstant.User.REGISTRATION) Queue registrationQueue) {
         return BindingBuilder
                 .bind(registrationQueue)
                 .to(userExchange())

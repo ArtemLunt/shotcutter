@@ -10,7 +10,7 @@ import java.util.Collection;
 // TODO: get rid of nulls
 public class JWTPrincipal implements Authentication {
 
-    private User user;
+    private final User user;
 
     public JWTPrincipal(User user) {
         this.user = user;

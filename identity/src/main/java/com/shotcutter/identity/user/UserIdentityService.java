@@ -13,8 +13,8 @@ import java.util.Optional;
 @DependsOn()
 public class UserIdentityService {
 
-    private UserRepository userRepository;
-    private ConverterService converterService;
+    private final UserRepository userRepository;
+    private final ConverterService converterService;
 
     public UserIdentityService(UserRepository userRepository,
                                ConverterService converterService

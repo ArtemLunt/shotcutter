@@ -8,10 +8,11 @@ import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationF
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private RedirectUrlFilter redirectUrlFilter;
-    private AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final RedirectUrlFilter redirectUrlFilter;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    public SecurityConfig(RedirectUrlFilter redirectUrlFilter, AuthenticationSuccessHandler authenticationSuccessHandler) {
+    public SecurityConfig(RedirectUrlFilter redirectUrlFilter,
+                          AuthenticationSuccessHandler authenticationSuccessHandler) {
         this.redirectUrlFilter = redirectUrlFilter;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
     }

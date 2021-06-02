@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 @Component
 public class JWTAuthConverter implements AuthenticationConverter {
 
-    private RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     public JWTAuthConverter(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;

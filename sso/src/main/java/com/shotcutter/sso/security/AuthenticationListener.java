@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationListener {
 
-    private RabbitTemplate rabbitTemplate;
-    private JWTService jwtService;
+    private final RabbitTemplate rabbitTemplate;
+    private final JWTService jwtService;
 
     public AuthenticationListener(RabbitTemplate rabbitTemplate, JWTService jwtService) {
         this.rabbitTemplate = rabbitTemplate;
