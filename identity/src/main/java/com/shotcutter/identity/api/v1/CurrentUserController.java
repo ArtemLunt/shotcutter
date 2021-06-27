@@ -39,7 +39,7 @@ public class CurrentUserController {
 
     @PatchMapping(value = "/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public User updateAvatar(@ModelAttribute MultipartFile avatar,
-                                JWTPrincipal principal) throws ResponseStatusException {
+                             JWTPrincipal principal) throws ResponseStatusException {
         try {
             return userIdentityService.updateAvatar(principal.getPrincipal().getId(), avatar)
                     .flatMap(user -> converterService.convertTo(user, User.class))
