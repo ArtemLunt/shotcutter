@@ -20,14 +20,17 @@ import java.util.Date;
 @Component
 public class S3StorageConfiguration {
 
-    @Value("${s3.accessKeyId}")
-    private String accessKeyId;
+    private final String accessKeyId;
+    private final String secretKey;
+    private final String region;
 
-    @Value("${s3.secretKey}")
-    private String secretKey;
-
-    @Value("${s3.region}")
-    private String region;
+    public S3StorageConfiguration(@Value("${s3.accessKeyId}") String accessKeyId,
+                                  @Value("${s3.secretKey}") String secretKey,
+                                  @Value("${s3.region}") String region) {
+        this.accessKeyId = accessKeyId;
+        this.secretKey = secretKey;
+        this.region = region;
+    }
 
     @Bean
     public AmazonS3 initializeAmazon() {

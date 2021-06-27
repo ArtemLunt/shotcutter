@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class JWTConfig {
 
-    @Value("${shotcutter.encryption.private}")
-    private String secret;
+    private final String secret;
+
+    public JWTConfig(@Value("${shotcutter.encryption.private}") String secret) {
+        this.secret = secret;
+    }
 
     @Bean
     public JWTService jwtService() {

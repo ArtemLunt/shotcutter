@@ -19,8 +19,7 @@ import java.util.Optional;
 @DependsOn()
 public class UserIdentityService {
 
-    @Value("${s3.bucketName}")
-    private String s3BucketName;
+    private final String s3BucketName;
 
     private final UserRepository userRepository;
     private final ConverterService converterService;
@@ -28,9 +27,11 @@ public class UserIdentityService {
 
     private final static String USER_AVATAR_PATH_PREFIX = "avatar/user-";
 
-    public UserIdentityService(UserRepository userRepository,
+    public UserIdentityService(@Value("${s3.bucketName}") String s3BucketName,
+                               UserRepository userRepository,
                                ConverterService converterService,
                                AmazonS3 amazonS3) {
+        this.s3BucketName = s3BucketName;
         this.userRepository = userRepository;
         this.converterService = converterService;
         this.amazonS3 = amazonS3;
@@ -54,8 +55,8 @@ public class UserIdentityService {
         var path = getUserAvatarPath(userId, avatar);
         var user = findById(userId).get();
 
-        // if avatar for this user already exist at s3 - we need to delete it
-        if (isCurrentUserAvatarAtS3(user)) {
+        // if avatar for this user already exist at s3 - we need to remove it at first
+        if (doesCurrentUserHaveAvatar(user)) {
             var currentAvatarPath = new URL(user.getAvatar()).getPath();
             amazonS3.deleteObject(s3BucketName, currentAvatarPath.substring(1));
         }
@@ -75,7 +76,7 @@ public class UserIdentityService {
                 .map(userRepository::save);
     }
 
-    private boolean isCurrentUserAvatarAtS3(UserEntity user) {
+    private boolean doesCurrentUserHaveAvatar(UserEntity user) {
         return user.getAvatar().contains(s3BucketName) && user.getAvatar().contains(user.getId());
     }
 
