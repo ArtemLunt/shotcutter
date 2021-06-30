@@ -1,9 +1,4 @@
 <div class="sc-profile">
-  <!--<div class="sc-profile__avatar">
-    <img class="sc-profile__avatar__img"
-         [src]="currentUser.avatar">
-  </div>-->
-
   <mat-card  class="sc-profile__card"
              *ngIf="currentUser$ | async as currentUser; else spinner">
     <mat-card-header>
