@@ -32,7 +32,7 @@ public class CurrentUserController {
     @PatchMapping
     public User patchUser(JWTPrincipal principal,
                           @RequestBody UserPatchDTO userPatchDTO) {
-        return userIdentityService.patch(principal.getPrincipal().getId(), userPatchDTO)
+        return userIdentityService.patch(principal.getPrincipal().getId(), userPatchDTO.getUsername())
                 .flatMap(user -> converterService.convertTo(user, User.class))
                 .get();
     }

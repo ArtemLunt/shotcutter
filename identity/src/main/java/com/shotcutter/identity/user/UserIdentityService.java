@@ -56,9 +56,13 @@ public class UserIdentityService {
         var user = findById(userId).get();
 
         // if avatar for this user already exist at s3 - we need to remove it at first
-        if (doesCurrentUserHaveAvatar(user)) {
-            var currentAvatarPath = new URL(user.getAvatar()).getPath();
-            amazonS3.deleteObject(s3BucketName, currentAvatarPath.substring(1));
+        if (user.getAvatar() != null) {
+            var avatarPath = new URL(user.getAvatar()).getPath();
+            var relativeAvatarPath = avatarPath.substring(1);
+
+            if (amazonS3.doesObjectExist(s3BucketName, relativeAvatarPath)) {
+                amazonS3.deleteObject(s3BucketName, relativeAvatarPath);
+            }
         }
 
         var request = new PutObjectRequest(s3BucketName, path, avatar.getInputStream(), new ObjectMetadata())
@@ -70,19 +74,16 @@ public class UserIdentityService {
         return Optional.ofNullable(userRepository.save(updatedUser));
     }
 
-    public Optional<UserEntity> patch(String userId, UserPatchDTO patchObject) {
+    public Optional<UserEntity> patch(String userId, String newName) {
         return findById(userId)
-                .map(user -> user.withUsername(patchObject.getUsername()))
+                .map(user -> user.withUsername(newName))
                 .map(userRepository::save);
     }
 
-    private boolean doesCurrentUserHaveAvatar(UserEntity user) {
-        return user.getAvatar().contains(s3BucketName) && user.getAvatar().contains(user.getId());
-    }
-
     private String getUserAvatarPath(String userId, MultipartFile file) {
-        var fileNameParts = file.getContentType().split("/");
-        var fileExtension = fileNameParts[fileNameParts.length - 1];
+        // content type has a format such a image/jpeg, here we do need to take an file extension
+        var fileContentTypeParts = file.getContentType().split("/");
+        var fileExtension = fileContentTypeParts[fileContentTypeParts.length - 1];
 
         return USER_AVATAR_PATH_PREFIX + userId + "_" + file.hashCode() + "." + fileExtension;
     }
