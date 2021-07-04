@@ -29,9 +29,10 @@ public class ConverterService {
         log.info("Converters map successfully initialized");
     }
 
-    public <Original, Target> Optional<Target> convertTo(Original item, Class<Target> targetClass) {
+    public <Original, Target> Target convertTo(Original item, Class<Target> targetClass) {
         return getConverter(item.getClass(), targetClass)
-                .map(converter -> ((Converter<Original, Target>)converter).convert(item));
+                .map(converter -> ((Converter<Original, Target>)converter).convert(item))
+                .get();
     }
 
     public <Original, Target> Optional<Converter<Original, Target>> getConverter(

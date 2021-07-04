@@ -48,57 +48,42 @@ public class UserIdentityService {
     }
 
     public Mono<UserEntity> registerUser(User unregisteredUser) {
-        return Mono.justOrEmpty(converterService.convertTo(unregisteredUser, UserEntity.class))
+        return Mono.just(converterService.convertTo(unregisteredUser, UserEntity.class))
                 .flatMap(userRepository::save);
     }
 
     public Mono<UserEntity> updateAvatar(String userId, MultipartFile avatar) {
         var path = getUserAvatarPath(userId, avatar);
 
-        return findById(userId)
-                .doOnNext(user -> {
-                    // if avatar for this user already exist at s3 - we need to remove it at first
-                    if (user.getAvatar() != null) {
-                        String avatarPath = null;
-                        try {
-                            avatarPath = new URL(user.getAvatar()).getPath();
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        }
-                        var relativeAvatarPath = avatarPath.substring(1);
+        var userMono = findById(userId);
 
-                        var deleteReq = DeleteObjectRequest
-                                .builder()
-                                .bucket(s3BucketName)
-                                .key(relativeAvatarPath)
-                                .build();
+        // if avatar for this user already exist at s3 - we need to remove it at first
+        userMono.subscribe(this::deleteUserAvatar);
 
-                        amazonS3.deleteObject(deleteReq);
-                    }
-                })
-                .flatMap(user -> {
-                    var putObjReq = PutObjectRequest.builder()
+        var putObjReq = PutObjectRequest.builder()
+                .bucket(s3BucketName)
+                .acl(S3CannedAccessControlList.PUBLIC_READ.toString())
+                .key(path)
+                .build();
+
+        CompletableFuture<PutObjectResponse> avatarUpdateResponseMono;
+
+        try {
+            avatarUpdateResponseMono = amazonS3.putObject(putObjReq, AsyncRequestBody.fromBytes(avatar.getBytes()));
+        } catch (IOException e) {
+            return Mono.error(e);
+        }
+
+        return Mono.zip(userMono, Mono.fromFuture(avatarUpdateResponseMono))
+                .flatMap(tuple -> {
+                    var user = tuple.getT1();
+                    var getUrlRequest = GetUrlRequest.builder()
                             .bucket(s3BucketName)
-                            .acl(S3CannedAccessControlList.PUBLIC_READ.toString())
                             .key(path)
                             .build();
+                    var newAvatarUrl = amazonS3.utilities().getUrl(getUrlRequest).toString();
 
-                    CompletableFuture<PutObjectResponse> res = null;
-                    try {
-                        res = amazonS3.putObject(putObjReq, AsyncRequestBody.fromBytes(avatar.getBytes()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return Mono.fromFuture(res)
-                            .flatMap(putObjectResponse -> {
-                                var getUrlRequest = GetUrlRequest.builder()
-                                        .bucket(s3BucketName)
-                                        .key(path)
-                                        .build();
-
-                                var avatarUrl = amazonS3.utilities().getUrl(getUrlRequest).toString();
-                                return userRepository.save(user.withAvatar(avatarUrl));
-                            });
+                    return userRepository.save(user.withAvatar(newAvatarUrl));
                 });
     }
 
@@ -114,5 +99,29 @@ public class UserIdentityService {
         var fileExtension = fileContentTypeParts[fileContentTypeParts.length - 1];
 
         return USER_AVATAR_PATH_PREFIX + userId + "_" + file.hashCode() + "." + fileExtension;
+    }
+
+    private Mono<DeleteObjectResponse> deleteUserAvatar(UserEntity user) {
+        if (user.getAvatar() == null || !user.getAvatar().contains(s3BucketName)) {
+            return Mono.just(null);
+        }
+
+        String avatarPath;
+
+        try {
+            avatarPath = new URL(user.getAvatar()).getPath();
+        } catch (MalformedURLException e) {
+            return Mono.just(null);
+        }
+
+        var relativeAvatarPath = avatarPath.substring(1);
+
+        var deleteReq = DeleteObjectRequest
+                .builder()
+                .bucket(s3BucketName)
+                .key(relativeAvatarPath)
+                .build();
+
+        return Mono.fromFuture(amazonS3.deleteObject(deleteReq));
     }
 }

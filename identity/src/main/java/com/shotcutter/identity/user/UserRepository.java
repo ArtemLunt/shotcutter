@@ -11,5 +11,5 @@ public interface UserRepository extends ReactiveMongoRepository<UserEntity, Long
     Mono<UserEntity> findByEmail(String email);
 
     @Override
-    <S extends UserEntity> Mono<S> save(S s);
+    Mono<UserEntity> save(UserEntity s);
 }

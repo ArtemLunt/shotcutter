@@ -79,7 +79,7 @@ public class TMDBIntegrator {
                 tmdbService.getPopularMovies(currentPage++)
                         .getResults()
                         .stream()
-                        .map(tmdbMovieDTO -> converterService.convertTo(tmdbMovieDTO, Movie.class).get())
+                        .map(tmdbMovieDTO -> converterService.convertTo(tmdbMovieDTO, Movie.class))
                         .collect(Collectors.toList())
         );
 

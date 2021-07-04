@@ -22,22 +22,19 @@ public class UserListener {
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.User.REGISTRATION)
     public Mono<User> registerNewUser(User unregisteredUser) {
         return userIdentityService.registerUser(unregisteredUser)
-                .map(user -> converterService.convertTo(user, User.class))
-                .flatMap(Mono::justOrEmpty);
+                .map(user -> converterService.convertTo(user, User.class));
     }
 
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.User.FIND_BY_ID)
     public Mono<User> getUserById(String id) {
         return userIdentityService.findById(id)
-                .map(userDto -> converterService.convertTo(userDto, User.class))
-                .flatMap(Mono::justOrEmpty);
+                .map(userDto -> converterService.convertTo(userDto, User.class));
     }
 
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.User.FIND_BY_EMAIL)
     public Mono<User> getUserByEmail(String email) {
         return userIdentityService.findByEmail(email)
-                .map(userDto -> converterService.convertTo(userDto, User.class))
-                .flatMap(Mono::justOrEmpty);
+                .map(userDto -> converterService.convertTo(userDto, User.class));
     }
 
 }

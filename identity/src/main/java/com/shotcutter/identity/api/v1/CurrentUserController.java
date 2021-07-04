@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
+
 @RequestMapping("/api/user/me")
 @RestController
 public class CurrentUserController {
@@ -34,8 +36,7 @@ public class CurrentUserController {
     public Mono<User> patchUser(JWTPrincipal principal,
                           @RequestBody UserPatchDTO userPatchDTO) {
         return userIdentityService.patch(principal.getPrincipal().getId(), userPatchDTO.getUsername())
-                .map(user -> converterService.convertTo(user, User.class))
-                .flatMap(Mono::justOrEmpty);
+                .map(user -> converterService.convertTo(user, User.class));
     }
 
     @PatchMapping(value = "/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -44,8 +45,10 @@ public class CurrentUserController {
         return userIdentityService
                 .updateAvatar(principal.getPrincipal().getId(), avatar)
                 .map(updatedUser -> converterService.convertTo(updatedUser, User.class))
-                .flatMap(Mono::justOrEmpty)
-                .onErrorResume(err -> Mono.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)));
+                // ioexception in this case means that this file is not readable, so throwing a bad request
+                .onErrorResume(IOException.class, e -> (
+                        Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST))
+                ));
     }
 
 }
