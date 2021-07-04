@@ -13,8 +13,8 @@ public class S3StorageConfiguration {
 
     @Bean
     public S3AsyncClient getAmazonS3Client(@Value("${s3.accessKeyId}") String accessKeyId,
-                                      @Value("${s3.secretKey}") String secretKey,
-                                      @Value("${s3.region}") String region) {
+                                           @Value("${s3.secretKey}") String secretKey,
+                                           @Value("${s3.region}") String region) {
 
         var credentials = AwsBasicCredentials.create(accessKeyId, secretKey);
         var credentialsProvider = StaticCredentialsProvider.create(credentials);
@@ -24,4 +24,5 @@ public class S3StorageConfiguration {
                 .credentialsProvider(credentialsProvider)
                 .build();
     }
+
 }

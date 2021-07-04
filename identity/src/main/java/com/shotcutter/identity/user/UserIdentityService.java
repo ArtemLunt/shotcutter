@@ -52,6 +52,12 @@ public class UserIdentityService {
                 .flatMap(userRepository::save);
     }
 
+    public Mono<UserEntity> patch(String userId, String newName) {
+        return findById(userId)
+                .map(user -> user.withUsername(newName))
+                .flatMap(userRepository::save);
+    }
+
     public Mono<UserEntity> updateAvatar(String userId, MultipartFile avatar) {
         var path = getUserAvatarPath(userId, avatar);
 
@@ -87,20 +93,6 @@ public class UserIdentityService {
                 });
     }
 
-    public Mono<UserEntity> patch(String userId, String newName) {
-        return findById(userId)
-                .map(user -> user.withUsername(newName))
-                .flatMap(userRepository::save);
-    }
-
-    private String getUserAvatarPath(String userId, MultipartFile file) {
-        // content type has a format such a image/jpeg, here we do need to take an file extension
-        var fileContentTypeParts = file.getContentType().split("/");
-        var fileExtension = fileContentTypeParts[fileContentTypeParts.length - 1];
-
-        return USER_AVATAR_PATH_PREFIX + userId + "_" + file.hashCode() + "." + fileExtension;
-    }
-
     private Mono<DeleteObjectResponse> deleteUserAvatar(UserEntity user) {
         if (user.getAvatar() == null || !user.getAvatar().contains(s3BucketName)) {
             return Mono.just(null);
@@ -124,4 +116,13 @@ public class UserIdentityService {
 
         return Mono.fromFuture(amazonS3.deleteObject(deleteReq));
     }
+
+    private String getUserAvatarPath(String userId, MultipartFile file) {
+        // content type has a format such a image/jpeg, here we do need to take an file extension
+        var fileContentTypeParts = file.getContentType().split("/");
+        var fileExtension = fileContentTypeParts[fileContentTypeParts.length - 1];
+
+        return USER_AVATAR_PATH_PREFIX + userId + "_" + file.hashCode() + "." + fileExtension;
+    }
+
 }
