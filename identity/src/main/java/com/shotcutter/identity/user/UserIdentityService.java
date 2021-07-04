@@ -71,7 +71,7 @@ public class UserIdentityService {
         try {
             avatarUpdateResponseMono = amazonS3.putObject(putObjReq, AsyncRequestBody.fromBytes(avatar.getBytes()));
         } catch (IOException e) {
-            return Mono.error(e);
+            return Mono.error(new InvalidUserDataException("Provided avatar file is invalid"));
         }
 
         return Mono.zip(userMono, Mono.fromFuture(avatarUpdateResponseMono))
