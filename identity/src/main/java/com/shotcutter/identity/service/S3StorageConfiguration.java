@@ -1,26 +1,27 @@
 package com.shotcutter.identity.service;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3AsyncClient;
 
 @Component
 public class S3StorageConfiguration {
 
     @Bean
-    public AmazonS3 getAmazonS3Client(@Value("${s3.accessKeyId}") String accessKeyId,
+    public S3AsyncClient getAmazonS3Client(@Value("${s3.accessKeyId}") String accessKeyId,
                                       @Value("${s3.secretKey}") String secretKey,
                                       @Value("${s3.region}") String region) {
-        AWSCredentials credentials = new BasicAWSCredentials(accessKeyId, secretKey);
-        return AmazonS3ClientBuilder
-                .standard()
-                .withRegion(region)
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+
+        var credentials = AwsBasicCredentials.create(accessKeyId, secretKey);
+        var credentialsProvider = StaticCredentialsProvider.create(credentials);
+
+        return S3AsyncClient.builder()
+                .region(Region.of(region))
+                .credentialsProvider(credentialsProvider)
                 .build();
     }
 }

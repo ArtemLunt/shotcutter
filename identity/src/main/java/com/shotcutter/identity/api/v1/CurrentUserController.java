@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import reactor.core.publisher.Mono;
 
 @RequestMapping("/api/user/me")
 @RestController
@@ -30,23 +31,21 @@ public class CurrentUserController {
     }
 
     @PatchMapping
-    public User patchUser(JWTPrincipal principal,
+    public Mono<User> patchUser(JWTPrincipal principal,
                           @RequestBody UserPatchDTO userPatchDTO) {
         return userIdentityService.patch(principal.getPrincipal().getId(), userPatchDTO.getUsername())
-                .flatMap(user -> converterService.convertTo(user, User.class))
-                .get();
+                .map(user -> converterService.convertTo(user, User.class))
+                .flatMap(Mono::justOrEmpty);
     }
 
     @PatchMapping(value = "/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public User updateAvatar(@ModelAttribute MultipartFile avatar,
-                             JWTPrincipal principal) throws ResponseStatusException {
-        try {
-            return userIdentityService.updateAvatar(principal.getPrincipal().getId(), avatar)
-                    .flatMap(user -> converterService.convertTo(user, User.class))
-                    .get();
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+    public Mono<User> updateAvatar(@ModelAttribute MultipartFile avatar,
+                                   JWTPrincipal principal) throws ResponseStatusException {
+        return userIdentityService
+                .updateAvatar(principal.getPrincipal().getId(), avatar)
+                .map(updatedUser -> converterService.convertTo(updatedUser, User.class))
+                .flatMap(Mono::justOrEmpty)
+                .onErrorResume(err -> Mono.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR)));
     }
 
 }
