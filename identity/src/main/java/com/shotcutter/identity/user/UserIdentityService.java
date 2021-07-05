@@ -3,7 +3,6 @@ package com.shotcutter.identity.user;
 import com.shotcutter.library.converter.ConverterService;
 import com.shotcutter.library.user.User;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
@@ -18,7 +17,6 @@ import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-@DependsOn()
 public class UserIdentityService {
 
     private final String s3BucketName;
