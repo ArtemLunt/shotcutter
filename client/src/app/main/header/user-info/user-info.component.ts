@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {UserState} from '@sc/user/state';
+import {CurrentUserState} from '@sc/user/state';
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {IUser} from '@sc/user';
@@ -12,7 +12,7 @@ import {IUser} from '@sc/user';
 })
 export class UserInfoComponent {
 
-  @Select(UserState.currentUser)
+  @Select(CurrentUserState.currentUser)
   readonly currentUser$: Observable<IUser>;
 
 }

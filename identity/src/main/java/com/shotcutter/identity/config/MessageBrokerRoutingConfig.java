@@ -34,8 +34,8 @@ public class MessageBrokerRoutingConfig {
     }
 
     @Bean
-    Binding registrationBinding(
-            @Qualifier(ShotcutterMessageRoutingConstant.User.REGISTRATION) Queue registrationQueue) {
+    Binding registrationBinding(@Qualifier(ShotcutterMessageRoutingConstant.User.REGISTRATION) Queue registrationQueue
+    ) {
         return BindingBuilder
                 .bind(registrationQueue)
                 .to(userExchange())

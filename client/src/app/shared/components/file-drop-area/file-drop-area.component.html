@@ -1,0 +1,18 @@
+<div class="sc-file-drop"
+     [class.mat-elevation-z8]="isDragOver"
+     mat-ripple>
+  <label class="sc-file-drop__label"
+         for="droppableArea">
+    {{labelText}}
+  </label>
+
+  <input class="sc-file-drop__input"
+         [class.sc-file-drop__input--drag-over]
+         (change)="onFileLoad($event?.target?.files)"
+         (dragover)="isDragOver = true"
+         (dragend)="isDragOver = false"
+         (dragexit)="isDragOver = false"
+         (dragleave)="isDragOver = false"
+         id="droppableArea"
+         type="file" />
+</div>

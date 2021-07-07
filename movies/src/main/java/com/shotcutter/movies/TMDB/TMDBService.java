@@ -17,8 +17,7 @@ public class TMDBService {
     private final RestTemplate restTemplate;
 
     TMDBService(RestTemplateBuilder restTemplateBuilder,
-                @Value("${tmdb.api.key}") String apiKey
-    ) {
+                @Value("${tmdb.api.key}") String apiKey) {
         restTemplate = restTemplateBuilder.build();
         restTemplate.setInterceptors(Arrays.asList(
                 TMDBApiInterceptor.builder()

@@ -13,16 +13,16 @@ import org.springframework.context.annotation.Configuration;
 public class MessageBrokerRoutingConfig {
 
     @Bean
-    DirectExchange authExchange() {
+    public DirectExchange authExchange() {
         return new DirectExchange(ShotcutterMessageRoutingConstant.Authentication.EXCHANGE_NAME);
     }
 
     @Bean
-    Binding validateUserBinding(@Qualifier(ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN) Queue authQueue) {
+    Binding validateUserBinding(@Qualifier(ShotcutterMessageRoutingConstant.Authentication.GET_ID_BY_TOKEN) Queue authQueue) {
         return BindingBuilder
                 .bind(authQueue)
                 .to(authExchange())
-                .with(ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN);
+                .with(ShotcutterMessageRoutingConstant.Authentication.GET_ID_BY_TOKEN);
     }
 
 }

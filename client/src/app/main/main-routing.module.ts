@@ -5,7 +5,17 @@ import { NgModule } from '@angular/core';
 const routes: Routes = [
   {
     path: '',
-    component: MainComponent
+    component: MainComponent,
+    children: [
+      {
+        path: 'profile',
+        loadChildren: () => import('@sc/profile').then(m => m.ProfileModule)
+      }
+    ]
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

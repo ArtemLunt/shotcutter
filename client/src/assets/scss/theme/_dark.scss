@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+$sr-dark-background: #212121;
+$sr-dark-font-color: #fff;
+
+$sr-dark-primary: mat-palette($mat-blue-grey);
+$sr-dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$sr-dark-warn:    mat-palette($mat-deep-orange);
+$sr-dark-theme:   mat-dark-theme((
+  color: (
+    primary: $sr-dark-primary,
+    accent: $sr-dark-accent,
+    warn: $sr-dark-warn,
+  )
+));
+
+@mixin sc-dark-theme-config {
+  .sc-dark-theme {
+    @include angular-material-color($sr-dark-theme);
+    background: $sr-dark-background;
+    color: $sr-dark-font-color;
+  }
+}

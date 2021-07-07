@@ -2,9 +2,37 @@
   display: flex;
   flex-direction: column;
 
-  &__bottom {
-    margin-top: auto;
+  &__footer {
     display: flex;
     justify-content: flex-end;
+  }
+
+  &__section {
+    display: block;
+    margin: 0 -16px;
+
+    ::ng-deep {
+      .mat-button-wrapper {
+        display: grid;
+        grid-template-columns: 40px auto;
+      }
+    }
+
+    &__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__text {
+      display: block;
+      margin-left: 16px;
+    }
+
+    &__button {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+    }
   }
 }

@@ -1,0 +1,59 @@
+<div class="sc-profile">
+  <mat-card  class="sc-profile__card"
+             *ngIf="currentUser$ | async as currentUser; else spinner">
+    <mat-card-header>
+      <img mat-card-avatar [src]="currentUser.avatar">
+      <mat-card-title>{{currentUser.username}}</mat-card-title>
+      <mat-card-subtitle>{{currentUser.email}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image [src]="currentUser.avatar">
+
+    <mat-card-content>
+      <div class="sc-profile__avatar-update-section">
+        <sc-file-drop-area *ngIf="!(isAvatarUpdating$ | async); else spinner"
+                           labelText="Drop the picture here to update your avatar"
+                           (fileLoaded)="uploadNewAvatar($event)">
+        </sc-file-drop-area>
+
+        <ng-template #spinner>
+          <div class="sc-profile__avatar-update-section__spinner">
+            <mat-spinner [diameter]="40">
+            </mat-spinner>
+          </div>
+        </ng-template>
+      </div>
+
+      <form class="sc-profile__form"
+            (ngSubmit)="submitForm()"
+            *ngIf="userInfoForm"
+            [formGroup]="userInfoForm">
+        <h3>Update profile information:</h3>
+
+        <mat-form-field>
+          <input matInput
+                 autocomplete="off"
+                 placeholder="Username"
+                 [formControlName]="controlKeys.username">
+        </mat-form-field>
+
+        <div>
+          <button type="submit"
+                  mat-raised-button
+                  [disabled]="isSubmitDisabled$ | async"
+                  color="primary">
+            Save
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+
+  <ng-template #spinner>
+    <div class="sc-profile__spinner">
+      <mat-spinner [diameter]="50">
+      </mat-spinner>
+    </div>
+  </ng-template>
+</div>

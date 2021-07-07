@@ -5,6 +5,7 @@ import com.shotcutter.library.messaging.ShotcutterMessageRoutingConstant;
 import com.shotcutter.library.user.User;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
 public class UserListener {
@@ -19,26 +20,21 @@ public class UserListener {
     }
 
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.User.REGISTRATION)
-    public User registerNewUser(User unregisteredUser) {
+    public Mono<User> registerNewUser(User unregisteredUser) {
         return userIdentityService.registerUser(unregisteredUser)
-                .flatMap(user -> converterService.convertTo(user, User.class))
-                .get();
+                .map(user -> converterService.convertTo(user, User.class));
     }
 
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.User.FIND_BY_ID)
-    public User getUserById(String id) {
-        var user = userIdentityService.findById(id)
-                .flatMap(userDto -> converterService.convertTo(userDto, User.class))
-                .get();
-
-        return user;
+    public Mono<User> getUserById(String id) {
+        return userIdentityService.findById(id)
+                .map(userDto -> converterService.convertTo(userDto, User.class));
     }
 
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.User.FIND_BY_EMAIL)
-    public User getUserByEmail(String email) {
+    public Mono<User> getUserByEmail(String email) {
         return userIdentityService.findByEmail(email)
-                .flatMap(userDto -> converterService.convertTo(userDto, User.class))
-                .get();
+                .map(userDto -> converterService.convertTo(userDto, User.class));
     }
 
 }

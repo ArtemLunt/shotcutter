@@ -10,6 +10,6 @@ public class ShotcutterMessageRoutingConstant {
 
     public final static class Authentication {
         public final static String EXCHANGE_NAME = "com.shotcutter.sso";
-        public final static String GET_USER_BY_TOKEN = "user-by-token";
+        public final static String GET_ID_BY_TOKEN = "user-id-by-token";
     }
 }

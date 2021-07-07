@@ -1,3 +1,3 @@
 export enum SCApiEndpoints {
-  CurrentUser = '/identity/user/me'
+  CurrentUser = '/identity/user/me',
 }

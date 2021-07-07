@@ -36,9 +36,9 @@ public class MessageBrokerConfig {
     }
 
     @Bean
-    @Qualifier(ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN)
+    @Qualifier(ShotcutterMessageRoutingConstant.Authentication.GET_ID_BY_TOKEN)
     public Queue getIdByTokenQueue() {
-        return new Queue(ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN, false);
+        return new Queue(ShotcutterMessageRoutingConstant.Authentication.GET_ID_BY_TOKEN, false);
     }
 
     @Bean

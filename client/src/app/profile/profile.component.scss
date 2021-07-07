@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+
+.sc-profile {
+  display: flex;
+  justify-content: center;
+
+  &__card {
+    width: 500px;
+  }
+
+  &__avatar-update-section {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+
+    &__spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__spinner {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

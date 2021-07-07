@@ -1,6 +1,6 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {AuthFacadeService} from '@sc/auth';
-import {UserState} from '@sc/user/state';
+import {CurrentUserState} from '@sc/user/state';
 import {Router} from '@angular/router';
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
@@ -14,7 +14,7 @@ import {IUser} from '@sc/user';
 })
 export class UserDetailsMenuComponent {
 
-  @Select(UserState.currentUser)
+  @Select(CurrentUserState.currentUser)
   readonly currentUser$: Observable<IUser>;
 
   constructor(

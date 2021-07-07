@@ -1,14 +1,15 @@
 package com.shotcutter.identity.user;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 @Repository
-public interface UserRepository extends MongoRepository<UserEntity, Long> {
+public interface UserRepository extends ReactiveMongoRepository<UserEntity, Long> {
 
-    Optional<UserEntity> findById(String id);
-    Optional<UserEntity> findByEmail(String email);
+    Mono<UserEntity> findById(String id);
+    Mono<UserEntity> findByEmail(String email);
 
+    @Override
+    Mono<UserEntity> save(UserEntity s);
 }
