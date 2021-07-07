@@ -15,7 +15,7 @@ public class AuthenticationListener {
     }
 
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.Authentication.GET_ID_BY_TOKEN)
-    public String getUserByToken(String accessToken) {
+    public String getUserIdByToken(String accessToken) {
         return jwtService.getUserIdByToken(accessToken);
     }
 

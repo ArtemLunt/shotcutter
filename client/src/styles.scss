@@ -13,3 +13,7 @@ a {
   text-decoration: unset;
   color: inherit;
 }
+
+.mat-option:hover:not(.mat-option-disabled) {
+  //background: black;
+}

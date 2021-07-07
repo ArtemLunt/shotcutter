@@ -6,6 +6,7 @@ spring:
       host: ${DB_HOST:localhost}
       authentication-database: ${DB_AUTH_DB:admin}
       database: ${DB_DB_NAME:shotcutter}
+      auto-index-creation: true
 tmdb:
   api:
     key: ${TMDB_API_KEY}

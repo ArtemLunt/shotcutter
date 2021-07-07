@@ -1,12 +1,12 @@
 package com.shotcutter.movies.TMDB;
 
 import com.shotcutter.library.converter.ConverterService;
+import com.shotcutter.movies.movie.MovieRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
-import com.shotcutter.movies.movie.MovieRepository;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import com.shotcutter.movies.movie.GenreService;
 import com.shotcutter.movies.movie.Movie;
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 @Component
 @ConditionalOnProperty(value = "tmdb.integration.init")
 public class TMDBIntegrator {
+
     private final ConverterService converterService;
     private final GenreService genreService;
     private final TMDBService tmdbService;
@@ -38,7 +39,7 @@ public class TMDBIntegrator {
         this.movieRepository = movieRepository;
 
         pageSize = 20;
-        currentPage = ((int) movieRepository.count()) / pageSize;
+        currentPage = movieRepository.count().block().intValue() / pageSize;
 
         if (currentPage == 0) {
             currentPage = 1;
@@ -85,4 +86,5 @@ public class TMDBIntegrator {
 
         log.info("Movies chunk successfully loaded");
     }
+
 }

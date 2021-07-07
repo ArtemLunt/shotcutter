@@ -2,6 +2,7 @@ package com.shotcutter.library.config;
 
 import com.shotcutter.library.messaging.ShotcutterMessageRoutingConstant;
 import com.shotcutter.library.user.User;
+import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.DefaultClassMapper;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -53,6 +54,11 @@ public class MessageBrokerConfig {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
         template.setMessageConverter(messageConverter());
         return template;
+    }
+
+    @Bean
+    public AsyncRabbitTemplate asyncRabbitTemplate(ConnectionFactory connectionFactory) {
+        return new AsyncRabbitTemplate(rabbitTemplate(connectionFactory));
     }
 
     @Bean

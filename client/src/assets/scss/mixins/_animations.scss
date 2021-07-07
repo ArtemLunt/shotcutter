@@ -1,0 +1,7 @@
+@mixin scale-on-hover($elevation: 1.01) {
+  transition: all .15s ease-in-out;
+
+  &:hover {
+    transform: scale($elevation);
+  }
+}

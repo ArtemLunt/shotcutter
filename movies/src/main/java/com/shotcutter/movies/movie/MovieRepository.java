@@ -1,8 +1,7 @@
 package com.shotcutter.movies.movie;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-@Repository
-public interface MovieRepository extends MongoRepository<Movie, Long> {
+public interface MovieRepository extends ReactiveMongoRepository<Movie, Long> {
+
 }

@@ -28,13 +28,13 @@ public class UserListener {
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.User.FIND_BY_ID)
     public Mono<User> getUserById(String id) {
         return userIdentityService.findById(id)
-                .map(userDto -> converterService.convertTo(userDto, User.class));
+                .map(userEntity -> converterService.convertTo(userEntity, User.class));
     }
 
     @RabbitListener(queues = ShotcutterMessageRoutingConstant.User.FIND_BY_EMAIL)
     public Mono<User> getUserByEmail(String email) {
         return userIdentityService.findByEmail(email)
-                .map(userDto -> converterService.convertTo(userDto, User.class));
+                .map(userEntity -> converterService.convertTo(userEntity, User.class));
     }
 
 }

@@ -8,10 +8,53 @@
           </a>
         </div>
 
-        <div class="sc-header__section sc-header__section--right">
+        <form class="sc-header__section sc-header__section--search" (ngSubmit)="searchMovie()">
+          <mat-form-field>
+            <mat-label>
+              Search
+            </mat-label>
+
+            <input [formControl]="lookupKeyFormControl"
+                   matInput
+                   [matAutocomplete]="auto">
+
+
+            <mat-autocomplete #auto="matAutocomplete"
+                              panelWidth="350px">
+              <mat-option class="sc-header__lookup-item"
+                          [value]="movie"
+                          *ngFor="let movie of movieLookupOptions$ | async">
+                <div class="sc-header__lookup-item__container">
+                  <div class="sc-header__lookup-item__img-container">
+                    <div class="sc-header__lookup-item__img"
+                         [style.background-image]="movie.posterPath | tmdbImage | urlCssValue">
+                    </div>
+                  </div>
+
+                  <div class="sc-header__lookup-item__info">
+                    <div class="sc-header__lookup-item__title">{{movie.title | maxLength:40}}</div>
+                    <div class="sc-header__lookup-item__subtitle">{{movie.overview | maxLength:80}}</div>
+                  </div>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+
+            <div class="sc-header__section__search-buttons" matSuffix>
+              <button mat-icon-button>
+                <mat-icon> settings </mat-icon>
+              </button>
+              <button mat-icon-button
+                      type="submit">
+                <mat-icon> search </mat-icon>
+              </button>
+            </div>
+          </mat-form-field>
+        </form>
+
+        <div class="sc-header__section sc-header__section--user-info">
           <button class="sc-header__section__item"
-                  mat-icon-button
-                  (click)="switchTheme()">
+                  (click)="switchTheme()"
+                  mat-icon-button>
             <mat-icon>
               {{themeIcon$ | async}}
             </mat-icon>
