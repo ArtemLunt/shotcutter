@@ -8,5 +8,5 @@ export function tapAsync<T = any>(
     mergeMap(res => (
       callback(res).pipe(map(() => res))
     ))
-  )
+  );
 }

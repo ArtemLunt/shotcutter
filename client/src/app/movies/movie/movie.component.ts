@@ -12,11 +12,11 @@ import {Observable} from 'rxjs';
 })
 export class MovieComponent {
 
-  readonly movie$: Observable<IMovie>
+  readonly movie$: Observable<IMovie>;
 
   constructor(route: ActivatedRoute) {
     this.movie$ = route.data
-      .pipe(map(({movie}) => movie))
+      .pipe(map(({movie}) => movie));
   }
 
 }

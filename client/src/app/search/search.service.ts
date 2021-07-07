@@ -25,7 +25,7 @@ export class SearchService {
         ),
         new HttpParams()
       )
-      .append('page', page.toString())
+      .append('page', page.toString());
 
     return this._http.get<IPage<IMovie>>(`${SCApiEndpoints.SearchMovies}`, { params });
   }

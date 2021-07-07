@@ -1,10 +1,10 @@
 export interface IPage<T> {
-  content: T[],
-  empty: boolean,
-  first: boolean,
-  last: boolean,
-  number: number,
-  numberOfElements: number,
+  content: T[];
+  empty: boolean;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
   pageable: {
     offset: number,
     pageNumber: number,
@@ -16,13 +16,13 @@ export interface IPage<T> {
       empty: boolean
     },
     unpaged: boolean
-  },
-  size: number,
+  };
+  size: number;
   sort: {
     sorted: boolean,
     unsorted: boolean,
     empty: boolean
-  },
-  totalElements: number,
-  totalPages: number,
+  };
+  totalElements: number;
+  totalPages: number;
 }

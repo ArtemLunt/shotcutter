@@ -14,14 +14,14 @@ export const AUTH_PROVIDERS_DATA: Record<AuthProviderKey, AuthProviderDataType> 
     title: 'Google',
     icon: '/assets/images/auth-providers/google.png',
     get url(): string {
-      return `${environment.ssoUrl}/oauth2/authorization/google?${HttpParam.RedirectTo}=${window.location.href}`
+      return `${environment.ssoUrl}/oauth2/authorization/google?${HttpParam.RedirectTo}=${window.location.href}`;
     }
   },
   yandex: {
     title: 'Yandex',
     icon: '/assets/images/auth-providers/yandex.png',
     get url(): string {
-      return `${environment.ssoUrl}/oauth2/authorization/yandex?${HttpParam.RedirectTo}=${window.location.href}`
+      return `${environment.ssoUrl}/oauth2/authorization/yandex?${HttpParam.RedirectTo}=${window.location.href}`;
     }
   }
-}
+};

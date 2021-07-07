@@ -4,5 +4,5 @@ export function createConstProvider<T>(constant: {[key in keyof T]: any}): Provi
   return {
     provide: constant,
     useValue: constant
-  }
+  };
 }

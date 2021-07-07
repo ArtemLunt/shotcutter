@@ -64,16 +64,16 @@ export class SearchState {
           searchResults: append(page.content),
           currentPage: page,
           searchInProgress: false
-        }))
+        }));
       })
-    )
+    );
   }
 
   @Action(CleanSearchResultsAction)
   cleanSearchResults(
     {setState}: StateContext<SearchStateModel>,
   ): void {
-    setState(defaults)
+    setState(defaults);
   }
 
 }

@@ -51,33 +51,33 @@ export class SearchComponent implements OnInit, OnDestroy {
         map(this._extractSearchParams.bind(this)),
         distinctUntilChanged(Comparators.deepComparePr),
         tapAsync(() => this._store.dispatch(new CleanSearchResultsAction()))
-      )
+      );
   }
 
   ngOnInit() {
     this.searchParams$
       .subscribe(params => {
         this._store.dispatch(new SearchAction(params));
-        this.searchConfigForm.patchValue(params)
+        this.searchConfigForm.patchValue(params);
       })
       .registerFor(this);
   }
 
   ngOnDestroy(): void {
-    this._store.dispatch(new CleanSearchResultsAction())
+    this._store.dispatch(new CleanSearchResultsAction());
   }
 
   search(queryParams: ISearchParams): void {
     this._router.navigate(['home/search'], {
       queryParams
-    })
+    });
   }
 
   private _extractSearchParams(paramMap: ParamMap): ISearchParams {
     return omitNullishFields({
       query: paramMap.get(SearchQueryParam.Query),
       genres: paramMap.getAll(SearchQueryParam.Genres)
-    })
+    });
   }
 
 }

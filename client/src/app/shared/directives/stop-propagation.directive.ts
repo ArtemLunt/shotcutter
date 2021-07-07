@@ -17,7 +17,7 @@ export class StopPropagationDirective {
 
     this._sub = fromEvent(this._elem.nativeElement, eventType)
       .subscribe((evt: Event) => {
-        debugger
+        debugger;
         evt.stopImmediatePropagation();
       });
     this._sub.registerFor(this);

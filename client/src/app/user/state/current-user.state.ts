@@ -65,7 +65,7 @@ export class CurrentUserState implements NgxsOnInit {
     {patchState, getState}: StateContext<CurrentUserStateModel>,
     {avatar}: UpdateAvatarAction
   ): Observable<IUser> {
-    patchState({isAvatarUpdating: true})
+    patchState({isAvatarUpdating: true});
     return this._userService.updateAvatar(avatar)
       .pipe(tap(currentUser => patchState({currentUser, isAvatarUpdating: false})));
   }

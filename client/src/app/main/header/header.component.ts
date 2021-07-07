@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
         }
 
         this.openMoviePage(value);
-        this.lookupKeyFormControl.setValue('')
+        this.lookupKeyFormControl.setValue('');
       })
       .registerFor(this);
   }
@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
   searchMovie(): void {
     const queryParams = omitNullishFields({
       [SearchQueryParam.Query]: this.lookupKeyFormControl.value
-    })
+    });
 
     this._router.navigate([`/home/search`], {queryParams});
   }
