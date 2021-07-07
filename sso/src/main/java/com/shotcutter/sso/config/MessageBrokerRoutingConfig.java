@@ -18,11 +18,11 @@ public class MessageBrokerRoutingConfig {
     }
 
     @Bean
-    Binding validateUserBinding(@Qualifier(ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN) Queue authQueue) {
+    Binding validateUserBinding(@Qualifier(ShotcutterMessageRoutingConstant.Authentication.GET_ID_BY_TOKEN) Queue authQueue) {
         return BindingBuilder
                 .bind(authQueue)
                 .to(authExchange())
-                .with(ShotcutterMessageRoutingConstant.Authentication.GET_USER_BY_TOKEN);
+                .with(ShotcutterMessageRoutingConstant.Authentication.GET_ID_BY_TOKEN);
     }
 
 }

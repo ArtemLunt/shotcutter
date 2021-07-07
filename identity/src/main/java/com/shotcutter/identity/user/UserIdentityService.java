@@ -93,7 +93,7 @@ public class UserIdentityService {
 
     private Mono<DeleteObjectResponse> deleteUserAvatar(UserEntity user) {
         if (user.getAvatar() == null || !user.getAvatar().contains(s3BucketName)) {
-            return Mono.just(null);
+            return Mono.empty();
         }
 
         String avatarPath;
@@ -101,7 +101,7 @@ public class UserIdentityService {
         try {
             avatarPath = new URL(user.getAvatar()).getPath();
         } catch (MalformedURLException e) {
-            return Mono.just(null);
+            return Mono.empty();
         }
 
         var relativeAvatarPath = avatarPath.substring(1);
