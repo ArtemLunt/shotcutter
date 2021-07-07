@@ -1,1 +1,1 @@
-export * from './asyncTap.operator';
+export * from './async-tap.operator';
