@@ -11,7 +11,7 @@
 
     <mat-card-content>
       <div class="sc-profile__avatar-update-section">
-        <sc-file-drop-area *ngIf="!(isAvatarUpdating$ | async); else spinner"
+        <sc-file-drop-area *ngIf="(isAvatarUpdating$ | async) === false; else spinner"
                            labelText="Drop the picture here to update your avatar"
                            (fileLoaded)="uploadNewAvatar($event)">
         </sc-file-drop-area>
