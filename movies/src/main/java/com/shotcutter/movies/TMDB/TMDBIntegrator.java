@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import com.shotcutter.movies.movie.GenreService;
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
@@ -19,6 +20,8 @@ public class TMDBIntegrator {
     private final TMDBService tmdbService;
 
     private final int pageSize;
+
+    // TODO: get rid of this property
     private int currentPage;
 
     TMDBIntegrator(ConverterService converterService,
@@ -31,6 +34,7 @@ public class TMDBIntegrator {
         this.tmdbService = tmdbService;
 
         pageSize = 20;
+        // TODO: refactor it out using the reactive stack
         currentPage = movieService.count().block().intValue() / pageSize;
 
         if (currentPage == 0) {
@@ -52,6 +56,7 @@ public class TMDBIntegrator {
             return;
         }
 
+        // TODO: refactor it out using the reactive stack
         tmdbService
                 .getPopularMovies(currentPage++)
                 .getResults()

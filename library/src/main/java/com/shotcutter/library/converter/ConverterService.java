@@ -14,7 +14,7 @@ import java.util.Set;
 @Slf4j
 @Service
 public class ConverterService {
-    Map<Class, Map<Class, Converter>> convertersTree;
+    private final Map<Class, Map<Class, Converter>> convertersTree;
 
     ConverterService(Set<Converter> converters) {
         convertersTree = new HashMap<>();
