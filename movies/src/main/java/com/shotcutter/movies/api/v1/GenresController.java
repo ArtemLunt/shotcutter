@@ -4,6 +4,7 @@ import com.shotcutter.movies.movie.GenreService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -17,8 +18,8 @@ public class GenresController {
     }
 
     @GetMapping
-    Mono<Iterable<String>> getGenres() {
-        return Mono.just(genreService.getGenresMap().values());
+    Iterable<String> getGenres() {
+        return genreService.getGenresMap().values();
     }
 
 }
