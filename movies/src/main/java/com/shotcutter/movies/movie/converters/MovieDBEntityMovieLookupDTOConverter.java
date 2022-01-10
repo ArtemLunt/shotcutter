@@ -1,15 +1,14 @@
 package com.shotcutter.movies.movie.converters;
 
-import com.shotcutter.movies.movie.Movie;
-import com.shotcutter.movies.movie.MovieLookupDTO;
+import com.shotcutter.movies.movie.entities.db.MovieDBEntity;
+import com.shotcutter.movies.movie.models.MovieLookupDTO;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MovieMovieLookupDTOConverter implements Converter<Movie, MovieLookupDTO> {
-
+public class MovieDBEntityMovieLookupDTOConverter implements Converter<MovieDBEntity, MovieLookupDTO> {
     @Override
-    public MovieLookupDTO convert(Movie movie) {
+    public MovieLookupDTO convert(MovieDBEntity movie) {
         return MovieLookupDTO.builder()
                 .id(movie.getId())
                 .genres(movie.getGenres())
@@ -18,5 +17,4 @@ public class MovieMovieLookupDTOConverter implements Converter<Movie, MovieLooku
                 .title(movie.getTitle())
                 .build();
     }
-
 }

@@ -1,10 +1,9 @@
-package com.shotcutter.movies.movie;
+package com.shotcutter.movies.movie.models;
 
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Data

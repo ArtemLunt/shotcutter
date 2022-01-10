@@ -1,12 +1,18 @@
 spring:
   data:
+    elasticsearch:
+      repositories:
+        enabled: true
     mongodb:
       username: ${DB_USERNAME:mongo}
       password: ${DB_PASSWORD:root}
       host: ${DB_HOST:localhost}
       authentication-database: ${DB_AUTH_DB:admin}
       database: ${DB_DB_NAME:shotcutter}
-      auto-index-creation: true
+  elasticsearch:
+    rest:
+      uris:
+        - http://localhost:9200
 tmdb:
   api:
     key: ${TMDB_API_KEY}

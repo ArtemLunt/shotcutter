@@ -1,23 +1,24 @@
-package com.shotcutter.movies.TMDB;
+package com.shotcutter.movies.TMDB.converters;
 
+import com.shotcutter.movies.TMDB.TMDBMovieDTO;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import com.shotcutter.movies.movie.GenreService;
-import com.shotcutter.movies.movie.Movie;
+import com.shotcutter.movies.movie.entities.db.MovieDBEntity;
 
 import java.util.stream.Collectors;
 
 @Component
-public class TMDBMovieDTOMovieConverter implements Converter<TMDBMovieDTO, Movie> {
+public class TMDBMovieDTOMovieDBEntityConverter implements Converter<TMDBMovieDTO, MovieDBEntity> {
     private final GenreService genreService;
 
-    TMDBMovieDTOMovieConverter(GenreService genreService) {
+    TMDBMovieDTOMovieDBEntityConverter(GenreService genreService) {
         this.genreService = genreService;
     }
 
     @Override
-    public Movie convert(TMDBMovieDTO tmdbMovieDTO) {
-        return Movie.builder()
+    public MovieDBEntity convert(TMDBMovieDTO tmdbMovieDTO) {
+        return MovieDBEntity.builder()
                 .id(tmdbMovieDTO.getId())
                 .adult(tmdbMovieDTO.getAdult())
                 .voteCount(tmdbMovieDTO.getVote_count())

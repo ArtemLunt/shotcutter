@@ -1,7 +1,6 @@
 import {CleanSearchResultsAction, SearchAction} from '@sc/search/state/search.actions';
 import {Component, ChangeDetectionStrategy, OnInit, OnDestroy} from '@angular/core';
 import {TypedFormBuilder, TypedFormGroup} from '@sc/shared/typed-forms';
-import {tapAsync} from '@sc/shared/utils/operators/async-tap.operator';
 import {SearchQueryParam} from '@sc/search/search-query-param.enum';
 import {ISearchParams} from '@sc/search/search-params.interface';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
@@ -50,7 +49,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       .pipe(
         map(this._extractSearchParams.bind(this)),
         distinctUntilChanged(Comparators.deepComparePr),
-        tapAsync(() => this._store.dispatch(new CleanSearchResultsAction()))
       );
   }
 
@@ -68,6 +66,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   search(queryParams: ISearchParams): void {
+    this._store.dispatch(new CleanSearchResultsAction());
     this._router.navigate(['home/search'], {
       queryParams
     });

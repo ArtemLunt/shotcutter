@@ -1,18 +1,13 @@
 package com.shotcutter.movies.TMDB;
 
 import com.shotcutter.library.converter.ConverterService;
-import com.shotcutter.movies.movie.MovieRepository;
+import com.shotcutter.movies.movie.MovieService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import com.shotcutter.movies.movie.GenreService;
-import com.shotcutter.movies.movie.Movie;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -23,43 +18,24 @@ public class TMDBIntegrator {
     private final GenreService genreService;
     private final TMDBService tmdbService;
 
-    private final MovieRepository movieRepository;
-
     private final int pageSize;
     private int currentPage;
 
     TMDBIntegrator(ConverterService converterService,
                    GenreService genreService,
                    TMDBService tmdbService,
-                   MovieRepository movieRepository
+                   MovieService movieService
     ) {
         this.converterService = converterService;
         this.genreService = genreService;
         this.tmdbService = tmdbService;
-        this.movieRepository = movieRepository;
 
         pageSize = 20;
-        currentPage = movieRepository.count().block().intValue() / pageSize;
+        currentPage = movieService.count().block().intValue() / pageSize;
 
         if (currentPage == 0) {
             currentPage = 1;
         }
-    }
-
-    /**
-     * Initializes genres set.
-     * Also initializes a genre map for simpler access to genres by id
-     */
-    @EventListener(ApplicationReadyEvent.class)
-    public void initializeGenresSet() {
-        log.info("Initialization with the TMDB service started");
-
-        genreService.setGenresMap(
-                tmdbService.getGenres().stream()
-                        .collect(Collectors.toMap(TMDBGenreDTO::getId, TMDBGenreDTO::getName))
-        );
-
-        log.info("Genres set successfully initialized");
     }
 
     /**
@@ -76,14 +52,10 @@ public class TMDBIntegrator {
             return;
         }
 
-        movieRepository.saveAll(
-                tmdbService.getPopularMovies(currentPage++)
-                        .getResults()
-                        .stream()
-                        .map(tmdbMovieDTO -> converterService.convertTo(tmdbMovieDTO, Movie.class))
-                        .collect(Collectors.toList())
-        );
-
+        tmdbService
+                .getPopularMovies(currentPage++)
+                .getResults()
+                .forEach(movie -> tmdbService.saveMovie(movie).block());
         log.info("Movies chunk successfully loaded");
     }
 

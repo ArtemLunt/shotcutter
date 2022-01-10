@@ -1,4 +1,13 @@
-import { debounceTime, distinctUntilChanged, filter, map, mergeMap, startWith, switchMap } from 'rxjs/operators';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  mergeMap,
+  startWith,
+  switchMap
+} from 'rxjs/operators';
 import { SetThemeAction, Theme, THEME_ICONS, ThemeState } from '@sc/theme';
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { IMovieLookupDTO, MoviesService } from '@sc/movies';
@@ -43,6 +52,7 @@ export class HeaderComponent implements OnInit {
         map(key => key?.trim()),
         distinctUntilChanged(),
         switchMap(key => !key ? of([]) : moviesService.lookup(key)),
+        catchError(err => of([])),
         startWith([])
       );
   }

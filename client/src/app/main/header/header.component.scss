@@ -93,6 +93,10 @@
     }
 
     &__item {
+      &:hover {
+        transform: scale(1.05);
+      }
+
       &:not(:last-child) {
         margin-right: 10px;
       }

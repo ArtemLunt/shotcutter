@@ -1,15 +1,15 @@
 package com.shotcutter.movies.movie.converters;
 
-import com.shotcutter.movies.movie.Movie;
-import com.shotcutter.movies.movie.MovieDTO;
+import com.shotcutter.movies.movie.entities.db.MovieDBEntity;
+import com.shotcutter.movies.movie.models.MovieDTO;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MovieMovieDTOConverter implements Converter<Movie, MovieDTO> {
+public class MovieDBEntityMovieDTOConverter implements Converter<MovieDBEntity, MovieDTO> {
 
     @Override
-    public MovieDTO convert(Movie movie) {
+    public MovieDTO convert(MovieDBEntity movie) {
         return MovieDTO.builder()
                 .id(movie.getId())
                 .adult(movie.getAdult())
