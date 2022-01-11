@@ -1,7 +1,7 @@
-import {MainComponent} from '@sc/main/main.component';
-import {RouterModule, Routes} from '@angular/router';
-import {NgModule} from '@angular/core';
-import {AuthGuard} from '@sc/auth';
+import { MainComponent } from '@sc/main/main.component';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { AuthGuard } from '@sc/auth';
 
 const routes: Routes = [
   {

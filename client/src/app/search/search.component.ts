@@ -1,17 +1,17 @@
-import {CleanSearchResultsAction, SearchAction} from '@sc/search/state/search.actions';
-import {Component, ChangeDetectionStrategy, OnInit, OnDestroy} from '@angular/core';
-import {TypedFormBuilder, TypedFormGroup} from '@sc/shared/typed-forms';
-import {SearchQueryParam} from '@sc/search/search-query-param.enum';
-import {ISearchParams} from '@sc/search/search-params.interface';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {Comparators, omitNullishFields} from '@sc/shared/utils';
-import {SearchState} from '@sc/search/state/search.state';
-import {distinctUntilChanged, map} from 'rxjs/operators';
-import {IPage} from '@sc/shared/interfaces';
-import {Select, Store} from '@ngxs/store';
-import {GenresState} from '@sc/genres';
-import {IMovie} from '@sc/movies';
-import {Observable} from 'rxjs';
+import { CleanSearchResultsAction, SearchAction } from '@sc/search/state/search.actions';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { TypedFormBuilder, TypedFormGroup } from '@sc/shared/typed-forms';
+import { SearchQueryParam } from '@sc/search/search-query-param.enum';
+import { ISearchParams } from '@sc/search/search-params.interface';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Comparators, omitNullishFields } from '@sc/shared/utils';
+import { SearchState } from '@sc/search/state/search.state';
+import { distinctUntilChanged, map } from 'rxjs/operators';
+import { IPage } from '@sc/shared/interfaces';
+import { Select, Store } from '@ngxs/store';
+import { GenresState } from '@sc/genres';
+import { IMovie } from '@sc/movies';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'sc-search',

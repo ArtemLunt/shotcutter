@@ -1,9 +1,9 @@
-import {State, Action, StateContext, NgxsOnInit, Selector} from '@ngxs/store';
-import {LoadGenresAction} from '@sc/genres/state/genres.actions';
-import {GenresService} from '@sc/genres/genres.service';
-import {Injectable} from '@angular/core';
-import {tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
+import { LoadGenresAction } from '@sc/genres/state/genres.actions';
+import { GenresService } from '@sc/genres/genres.service';
+import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export class GenresStateModel {
   genres: string[];

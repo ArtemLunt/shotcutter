@@ -1,8 +1,8 @@
-import {TypedFormGroup} from '@sc/shared/typed-forms/typed-form-group.class';
-import {TypedFormsModule} from '@sc/shared/typed-forms/typed-forms.module';
-import {AbstractControlOptions, AsyncValidatorFn, FormBuilder, ValidatorFn} from '@angular/forms';
-import {Injectable} from '@angular/core';
-import {TypedFormControl} from '@sc/shared/typed-forms/typed-form-control.class';
+import { TypedFormGroup } from '@sc/shared/typed-forms/typed-form-group.class';
+import { TypedFormsModule } from '@sc/shared/typed-forms/typed-forms.module';
+import { AbstractControlOptions, AsyncValidatorFn, FormBuilder, ValidatorFn } from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { TypedFormControl } from '@sc/shared/typed-forms/typed-form-control.class';
 
 @Injectable({
   providedIn: TypedFormsModule

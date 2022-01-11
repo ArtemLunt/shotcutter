@@ -1,10 +1,10 @@
-import {MoviesRoutingModule} from '@sc/movies/movies-routing.module';
-import {MovieComponent} from '@sc/movies/movie/movie.component';
-import {MovieResolver} from '@sc/movies/movie.resolver';
+import { MoviesRoutingModule } from '@sc/movies/movies-routing.module';
+import { MovieComponent } from '@sc/movies/movie/movie.component';
+import { MovieResolver } from '@sc/movies/movie.resolver';
 import { CommonModule } from '@angular/common';
-import {PipesModule} from '@sc/shared/pipes';
+import { PipesModule } from '@sc/shared/pipes';
 import { NgModule } from '@angular/core';
-import {SharedModule} from '@sc/shared';
+import { SharedModule } from '@sc/shared';
 
 
 @NgModule({
@@ -19,4 +19,5 @@ import {SharedModule} from '@sc/shared';
     MovieResolver
   ]
 })
-export class MoviesModule { }
+export class MoviesModule {
+}

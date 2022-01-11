@@ -1,9 +1,9 @@
-import {IMovie, IMovieLookupDTO} from '@sc/movies/movie.interface';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {SCApiEndpoints} from '@sc/shared/enums';
+import { IMovie, IMovieLookupDTO } from '@sc/movies/movie.interface';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { SCApiEndpoints } from '@sc/shared/enums';
 import { SearchQueryParam } from '@sc/search';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

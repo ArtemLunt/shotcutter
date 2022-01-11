@@ -1,7 +1,7 @@
-import {MoviesService} from '@sc/movies/movies.service';
-import {IMovie} from '@sc/movies/movie.interface';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import { MoviesService } from '@sc/movies/movies.service';
+import { IMovie } from '@sc/movies/movie.interface';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
