@@ -1,0 +1,54 @@
+<div class="sc-search">
+  <form class="sc-search__config"
+        [formGroup]="searchConfigForm"
+        (ngSubmit)="search(searchConfigForm.value)">
+    <mat-card>
+      <mat-card-content>
+        <div class="sc-search__config__form">
+          <mat-form-field>
+            <mat-label>Search query</mat-label>
+            <input matInput formControlName="query">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Genres</mat-label>
+            <mat-select formControlName="genres" multiple>
+              <mat-option [value]="null">
+                Any
+              </mat-option>
+
+              <mat-option *ngFor="let genre of genres$ | async"
+                          [value]="genre">
+                {{genre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="sc-search__config__footer">
+        <button mat-button>
+          Search
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+
+  <div class="sc-search__results">
+    <ng-container *ngIf="searchInProgress$ | async">
+      <mat-spinner>
+      </mat-spinner>
+    </ng-container>
+
+    <ng-container *ngIf="(currentPage$ | async)?.totalElements === 0">
+      There's no movies for specified params
+    </ng-container>
+
+    <div *ngFor="let movie of results$ | async"
+         class="sc-search__item">
+      <sc-search-result-item [movie]="movie"
+                             [disabledGenres]="(searchParams$ | async)?.genres">
+      </sc-search-result-item>
+    </div>
+  </div>
+</div>

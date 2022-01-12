@@ -17,22 +17,6 @@ import {Select, Store} from '@ngxs/store';
 })
 export class ProfileComponent implements OnInit {
 
-  @Select(CurrentUserState.currentUser)
-  readonly currentUser$: Observable<IUser>;
-  @Select(CurrentUserState.isAvatarUpdating)
-  readonly isAvatarUpdating$: Observable<boolean>;
-
-  readonly controlKeys: { [key in keyof IEditableUserPart]: keyof IEditableUserPart };
-
-  isSubmitDisabled$: Observable<boolean>;
-  userInfoForm: TypedFormGroup<IEditableUserPart>;
-
-  private static readonly AVAILABLE_AVATAR_TYPES: Set<string> = new Set<string>()
-    .add('jpg')
-    .add('jpeg')
-    .add('png')
-    .add('gif');
-
   get currentUser(): IUser {
     return this._store.selectSnapshot(CurrentUserState.currentUser);
   }
@@ -45,6 +29,22 @@ export class ProfileComponent implements OnInit {
   ) {
     this.controlKeys = {username: 'username'};
   }
+
+  private static readonly AVAILABLE_AVATAR_TYPES: Set<string> = new Set<string>()
+    .add('jpg')
+    .add('jpeg')
+    .add('png')
+    .add('gif');
+
+  @Select(CurrentUserState.currentUser)
+  readonly currentUser$: Observable<IUser>;
+  @Select(CurrentUserState.isAvatarUpdating)
+  readonly isAvatarUpdating$: Observable<boolean>;
+
+  readonly controlKeys: { [key in keyof IEditableUserPart]: keyof IEditableUserPart };
+
+  isSubmitDisabled$: Observable<boolean>;
+  userInfoForm: TypedFormGroup<IEditableUserPart>;
 
   ngOnInit(): void {
     this.currentUser$

@@ -1,23 +1,22 @@
-package com.shotcutter.movies.movie;
+package com.shotcutter.movies.movie.models;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Data
-public class MovieDTO {
+@Builder
+public class MovieSearchDTO {
     private Long id;
     private Boolean adult;
-    private Integer voteCount;
-    private Integer voteAverage;
-    private Integer popularity;
-    private List<String> genres;
+    private Long popularity;
+    private Set<String> genres;
     private Date releaseDate;
     private String posterPath;
     private String overview;
     private String originalTitle;
     private String originalLanguage;
     private String title;
-    private String backdropPath;
 }

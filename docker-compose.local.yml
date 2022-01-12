@@ -3,7 +3,7 @@ version: '3.7'
 services:
   shotcutter-db:
     image: mongo:latest
-    container_name: mongodb
+    container_name: shotcutter-mongo
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongo
@@ -17,12 +17,32 @@ services:
 
   shotcutter-message-broker:
     image: rabbitmq:latest
-    container_name: rabbitmq
+    container_name: shotcutter-rabbit
     environment:
       RABBITMQ_USER: rabbit
       RABBITMQ_PASSWORD: rabbit
     ports:
       - 5672:5672
       - 15672:15672
+
+  shotcutter-search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
+    container_name: shotcutter-search-main
+    environment:
+      - node.name=shotcutter-search-main
+      - cluster.name=es-docker-cluster
+      - cluster.initial_master_nodes=shotcutter-search-main
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - shotcutter-search-main:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
 volumes:
   shotcutter-db:
+  shotcutter-search-main:
+    driver: local

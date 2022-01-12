@@ -1,0 +1,46 @@
+<div class="sc-movie">
+
+  <ng-container *ngIf="movie$ | async as movie">
+    <div class="sc-movie__section sc-movie__section--avatar">
+      <mat-card>
+        <img [src]="movie.posterPath | tmdbImage" mat-card-image>
+      </mat-card>
+    </div>
+
+    <div class="sc-movie__section">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> {{movie.title}} </mat-card-title>
+          <mat-card-subtitle>
+            <div>
+              Genres:
+              <ng-container *ngFor="let genre of movie.genres; let i = index">
+                <span>{{genre | lowercase}}</span>{{i !== movie.genres.length - 1 ? ',' : ''}}
+              </ng-container>
+            </div>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="sc-movie__info-section"
+               *ngIf="movie.originalTitle !== movie.title">
+            <span>Original Title:</span> {{movie.originalTitle}}
+          </div>
+
+          <div class="sc-movie__info-section">
+            <span>Original Language:</span> {{movie.originalLanguage}}
+          </div>
+
+          <p class="sc-movie__info-section">
+            {{movie.overview}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="sc-movie__section">
+
+    </div>
+  </ng-container>
+
+</div>

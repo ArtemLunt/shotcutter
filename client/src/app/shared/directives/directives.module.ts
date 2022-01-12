@@ -1,9 +1,11 @@
-import {ClickOutsideDirective} from './click-outside.directive';
-import {CommonModule} from '@angular/common';
-import {NgModule, Type} from '@angular/core';
+import { StopPropagationDirective } from '@sc/shared/directives/stop-propagation.directive';
+import { ClickOutsideDirective } from '@sc/shared/directives/click-outside.directive';
+import { CommonModule } from '@angular/common';
+import { NgModule, Type } from '@angular/core';
 
 const DIRECTIVES: Type<any>[] = [
-  ClickOutsideDirective
+  StopPropagationDirective,
+  ClickOutsideDirective,
 ];
 
 @NgModule({

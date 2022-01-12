@@ -1,17 +1,17 @@
 package com.shotcutter.movies;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.elasticsearch.repository.config.EnableReactiveElasticsearchRepositories;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.SpringApplication;
 
 @EnableAsync
 @EnableScheduling
+@EnableReactiveMongoRepositories("com.shotcutter.**.repositories.db")
+@EnableReactiveElasticsearchRepositories("com.shotcutter.**.repositories.search")
 @SpringBootApplication
-@ComponentScan("com.shotcutter.library")
-@ComponentScan("com.shotcutter.security-starter")
-@ComponentScan("com.shotcutter.movies")
 public class MoviesApplication {
 
     public static void main(String[] args) {

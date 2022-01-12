@@ -1,0 +1,12 @@
+<div class="sc-genres-list">
+  <mat-chip-list scStopPropagation scEventType="click">
+    <mat-chip class="sc-search-result-item__genres__item"
+              [class.sc-search-result-item__genres__item--searchable]="!isSearchDisabledForGenre(genre)"
+              [disabled]="isSearchDisabledForGenre(genre)"
+              *ngFor="let genre of genresList"
+              routerLink="/home/search"
+              [queryParams]="getSearchQueryParams(genre)">
+      {{genre}}
+    </mat-chip>
+  </mat-chip-list>
+</div>

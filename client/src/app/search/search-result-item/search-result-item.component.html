@@ -1,0 +1,31 @@
+<div class="sc-search-result-item">
+  <mat-card routerLink="/home/movie/{{movie.id}}">
+
+    <img [src]="movie.posterPath | tmdbImage" mat-card-image>
+
+    <div>
+      <mat-card-header>
+        <mat-card-title>
+          {{movie.title}}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          {{subtitle}}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="sc-search-result-item__genres">
+          <sc-genres-list [genresList]="movie.genres"
+                          [disabledGenres]="disabledGenres">
+          </sc-genres-list>
+        </div>
+
+        <div>
+          {{movie.overview}}
+        </div>
+      </mat-card-content>
+    </div>
+
+  </mat-card>
+</div>

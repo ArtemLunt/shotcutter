@@ -1,7 +1,5 @@
-package com.shotcutter.movies.movie;
+package com.shotcutter.movies.movie.models;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.annotation.Id;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,9 +8,7 @@ import java.util.Set;
 
 @Data
 @Builder
-@Document(collection = "movies")
-public class Movie {
-    @Id
+public class MovieDTO {
     private Long id;
     private Boolean adult;
     private Long voteCount;

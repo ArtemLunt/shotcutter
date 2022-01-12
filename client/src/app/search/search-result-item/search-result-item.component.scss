@@ -1,0 +1,35 @@
+@import 'mixins/animations';
+
+.sc-search-result-item {
+  &__genres {
+    margin-bottom: 10px;
+
+    &__item {
+      &--searchable {
+        cursor: pointer;
+        @include scale-on-hover(1.05);
+      }
+    }
+  }
+
+  ::ng-deep {
+    .mat-card {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      grid-column-gap: 20px;
+
+      &-image {
+        margin: 0;
+        width: 100%;
+      }
+
+      &-header-text {
+        margin: 0;
+      }
+
+      &-content {
+        padding-right: 16px;
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {Theme, ThemeState} from '@sc/theme';
-import {Select} from '@ngxs/store';
-import {Observable} from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Theme, ThemeState } from '@sc/theme';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'sc-root',
