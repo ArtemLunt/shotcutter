@@ -1,6 +1,6 @@
 package com.shotcutter.movies.TMDB;
 
-import com.shotcutter.movies.movie.GenreService;
+import com.shotcutter.movies.movie.services.GenreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;

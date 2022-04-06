@@ -4,6 +4,41 @@
     <div class="sc-movie__section sc-movie__section--avatar">
       <mat-card>
         <img [src]="movie.posterPath | tmdbImage" mat-card-image>
+        <div class="sc-movie__actions" mat-card-content>
+          <button *ngIf="!!(movieLikesSummary$ | async).likedByCurrentUser; else notFilledLike"
+                  (click)="deleteLike(movie.id)"
+                  mat-icon-button >
+            <mat-icon>
+              thumb_up_off
+            </mat-icon>
+          </button>
+
+          <ng-template #notFilledLike>
+            <button (click)="likeMovie(movie.id, true)"
+                    mat-icon-button>
+              <mat-icon>
+                thumb_up_off_alt
+              </mat-icon>
+            </button>
+          </ng-template>
+
+          <button *ngIf="!!(movieLikesSummary$ | async).dislikedByCurrentUser; else notFilledDislike"
+                  (click)="deleteLike(movie.id)"
+                  mat-icon-button>
+            <mat-icon>
+              thumb_down_off
+            </mat-icon>
+          </button>
+
+          <ng-template #notFilledDislike>
+            <button (click)="likeMovie(movie.id, false)"
+                    mat-icon-button>
+              <mat-icon>
+                thumb_down_off_alt
+              </mat-icon>
+            </button>
+          </ng-template>
+        </div>
       </mat-card>
     </div>
 

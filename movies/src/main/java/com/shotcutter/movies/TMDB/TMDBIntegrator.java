@@ -1,14 +1,13 @@
 package com.shotcutter.movies.TMDB;
 
 import com.shotcutter.library.converter.ConverterService;
-import com.shotcutter.movies.movie.MovieService;
+import com.shotcutter.movies.movie.services.MovieService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import com.shotcutter.movies.movie.GenreService;
+import com.shotcutter.movies.movie.services.GenreService;
 import lombok.extern.slf4j.Slf4j;
-import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component

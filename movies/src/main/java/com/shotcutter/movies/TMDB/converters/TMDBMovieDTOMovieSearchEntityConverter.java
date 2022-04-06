@@ -1,7 +1,7 @@
 package com.shotcutter.movies.TMDB.converters;
 
 import com.shotcutter.movies.TMDB.TMDBMovieDTO;
-import com.shotcutter.movies.movie.GenreService;
+import com.shotcutter.movies.movie.services.GenreService;
 import com.shotcutter.movies.movie.entities.search.MovieSearchEntity;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

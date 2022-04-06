@@ -1,11 +1,9 @@
 package com.shotcutter.movies.api.v1;
 
-import com.shotcutter.movies.movie.GenreService;
+import com.shotcutter.movies.movie.services.GenreService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("api/genres")

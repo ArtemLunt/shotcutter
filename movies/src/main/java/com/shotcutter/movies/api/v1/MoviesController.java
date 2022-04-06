@@ -3,7 +3,7 @@ package com.shotcutter.movies.api.v1;
 import com.shotcutter.library.converter.ConverterService;
 import com.shotcutter.movies.movie.models.MovieDTO;
 import com.shotcutter.movies.movie.models.MovieLookupDTO;
-import com.shotcutter.movies.movie.MovieService;
+import com.shotcutter.movies.movie.services.MovieService;
 import com.shotcutter.movies.movie.models.MovieSearchDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
