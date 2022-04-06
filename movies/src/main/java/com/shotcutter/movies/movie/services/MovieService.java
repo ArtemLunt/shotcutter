@@ -1,4 +1,4 @@
-package com.shotcutter.movies.movie;
+package com.shotcutter.movies.movie.services;
 
 import com.shotcutter.movies.movie.entities.db.MovieDBEntity;
 import com.shotcutter.movies.movie.entities.search.MovieSearchEntity;

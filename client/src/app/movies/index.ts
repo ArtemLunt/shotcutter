@@ -1,3 +1,4 @@
+export * from './movie-likes-summary.interface';
 export * from './movie/movie.component';
 export * from './movies-routing.module';
 export * from './movie.interface';

@@ -1,4 +1,4 @@
-package com.shotcutter.movies.movie;
+package com.shotcutter.movies.movie.services;
 
 import org.springframework.stereotype.Service;
 import lombok.Data;

@@ -8,7 +8,7 @@ const routes: Routes = [
     path: ':id',
     component: MovieComponent,
     resolve: {
-      movie: MovieResolver
+      data: MovieResolver
     }
   }
 ];

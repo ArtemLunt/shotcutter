@@ -1,7 +1,7 @@
 package com.shotcutter.movies.TMDB;
 
 import com.shotcutter.library.converter.ConverterService;
-import com.shotcutter.movies.movie.MovieService;
+import com.shotcutter.movies.movie.services.MovieService;
 import com.shotcutter.movies.movie.entities.db.MovieDBEntity;
 import com.shotcutter.movies.movie.entities.search.MovieSearchEntity;
 import org.springframework.boot.web.client.RestTemplateBuilder;
