@@ -1,11 +1,11 @@
-import {LoadUserAction, UpdateUserAction, UpdateAvatarAction} from '@sc/user/state/current-user.actions';
-import {State, Action, StateContext, NgxsOnInit, Selector} from '@ngxs/store';
-import {UserService} from '@sc/user/user.service';
-import {IUser} from '@sc/user/user.interface';
-import {Injectable} from '@angular/core';
-import { filter, tap } from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { LoadUserAction, UpdateUserAction, UpdateAvatarAction } from '@sc/user/state/current-user.actions';
+import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
+import { UserService } from '@sc/user/user.service';
+import { IUser } from '@sc/user/user.interface';
 import { AuthFacadeService } from '@sc/auth';
+import { filter, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export class CurrentUserStateModel {
   currentUser: IUser;
@@ -25,12 +25,12 @@ export class CurrentUserStateModel {
 export class CurrentUserState implements NgxsOnInit {
 
   @Selector()
-  static currentUser({currentUser}: CurrentUserStateModel): IUser {
+  static currentUser({ currentUser }: CurrentUserStateModel): IUser {
     return currentUser;
   }
 
   @Selector()
-  static isAvatarUpdating({isAvatarUpdating}: CurrentUserStateModel): boolean {
+  static isAvatarUpdating({ isAvatarUpdating }: CurrentUserStateModel): boolean {
     return isAvatarUpdating;
   }
 
@@ -47,32 +47,32 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(LoadUserAction)
   loadUser(
-    {patchState}: StateContext<CurrentUserStateModel>
+    { patchState }: StateContext<CurrentUserStateModel>
   ): Observable<IUser> {
     return this._userService.getCurrentUser()
       .pipe(
-        tap(currentUser => patchState({currentUser}))
+        tap(currentUser => patchState({ currentUser }))
       );
   }
 
   @Action(UpdateUserAction)
   updateUser(
-    {patchState, getState}: StateContext<CurrentUserStateModel>,
-    {patchObj}: UpdateUserAction
+    { patchState, getState }: StateContext<CurrentUserStateModel>,
+    { patchObj }: UpdateUserAction
   ): Observable<IUser> {
-    const {currentUser: {id}} = getState();
+    const { currentUser: { id } } = getState();
     return this._userService.patchUser(id, patchObj)
-      .pipe(tap(currentUser => patchState({currentUser})));
+      .pipe(tap(currentUser => patchState({ currentUser })));
   }
 
   @Action(UpdateAvatarAction)
   updateAvatar(
-    {patchState, getState}: StateContext<CurrentUserStateModel>,
-    {avatar}: UpdateAvatarAction
+    { patchState, getState }: StateContext<CurrentUserStateModel>,
+    { avatar }: UpdateAvatarAction
   ): Observable<IUser> {
-    patchState({isAvatarUpdating: true});
+    patchState({ isAvatarUpdating: true });
     return this._userService.updateAvatar(avatar)
-      .pipe(tap(currentUser => patchState({currentUser, isAvatarUpdating: false})));
+      .pipe(tap(currentUser => patchState({ currentUser, isAvatarUpdating: false })));
   }
 
 }
