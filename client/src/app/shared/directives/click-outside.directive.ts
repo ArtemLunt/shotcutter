@@ -1,10 +1,12 @@
 import {Directive, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
+import { AutoUnsubscribe } from '@sc/shared/decorators';
 import {skip} from 'rxjs/operators';
 import {fromEvent} from 'rxjs';
 
 @Directive({
   selector: '[scClickOutside]'
 })
+@AutoUnsubscribe()
 export class ClickOutsideDirective implements OnInit {
 
   @Output()

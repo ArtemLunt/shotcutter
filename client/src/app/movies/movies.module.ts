@@ -4,9 +4,10 @@ import { MovieState } from '@sc/movies/movie/state/movie.state';
 import { MovieResolver } from '@sc/movies/movie.resolver';
 import { CommonModule } from '@angular/common';
 import { PipesModule } from '@sc/shared/pipes';
-import { NgModule } from '@angular/core';
 import { SharedModule } from '@sc/shared';
 import { NgxsModule } from '@ngxs/store';
+import { NgModule } from '@angular/core';
+import { AuthModule } from '@sc/auth';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { NgxsModule } from '@ngxs/store';
     CommonModule,
     SharedModule,
     PipesModule,
-    NgxsModule.forFeature([MovieState])
+    NgxsModule.forFeature([MovieState]),
+    AuthModule
   ],
   providers: [
     MovieResolver

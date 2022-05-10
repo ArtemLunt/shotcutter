@@ -25,7 +25,7 @@ export class UserDetailsMenuComponent {
 
   logout(): void {
     this._authFacadeService.removeToken();
-    this._router.navigate(['/auth']);
+    this._router.navigate(['/']);
   }
 
 }

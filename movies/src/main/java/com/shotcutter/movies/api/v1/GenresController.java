@@ -1,12 +1,14 @@
 package com.shotcutter.movies.api.v1;
 
 import com.shotcutter.movies.movie.services.GenreService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/genres")
+@PreAuthorize("permitAll()")
 public class GenresController {
     
     private final GenreService genreService;

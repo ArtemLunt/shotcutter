@@ -4,38 +4,48 @@
     <div class="sc-movie__section sc-movie__section--avatar">
       <mat-card>
         <img [src]="movie.posterPath | tmdbImage" mat-card-image>
-        <div class="sc-movie__actions" mat-card-content>
-          <button *ngIf="!!(movieLikesSummary$ | async).likedByCurrentUser; else notFilledLike"
+        <div class="sc-movie__actions"
+             *ngIf="movieLikesSummary$ | async as movieLikesSummary"
+             mat-card-content>
+          <button *ngIf="movieLikesSummary.likedByCurrentUser; else notFilledLike"
+                  [disabled]="authService.isUnauthenticated() | async"
                   (click)="deleteLike(movie.id)"
                   mat-icon-button >
             <mat-icon>
               thumb_up_off
             </mat-icon>
+            {{ movieLikesSummary.amountOfLikes }}
           </button>
 
           <ng-template #notFilledLike>
             <button (click)="likeMovie(movie.id, true)"
+                    [disabled]="authService.isUnauthenticated() | async"
                     mat-icon-button>
               <mat-icon>
                 thumb_up_off_alt
               </mat-icon>
+              {{ movieLikesSummary.amountOfLikes }}
             </button>
           </ng-template>
 
-          <button *ngIf="!!(movieLikesSummary$ | async).dislikedByCurrentUser; else notFilledDislike"
+          <button *ngIf="movieLikesSummary.dislikedByCurrentUser; else notFilledDislike"
+                  [disabled]="authService.isUnauthenticated() | async"
                   (click)="deleteLike(movie.id)"
                   mat-icon-button>
             <mat-icon>
               thumb_down_off
             </mat-icon>
+            {{ movieLikesSummary.amountOfDislikes }}
           </button>
 
           <ng-template #notFilledDislike>
             <button (click)="likeMovie(movie.id, false)"
+                    [disabled]="authService.isUnauthenticated() | async"
                     mat-icon-button>
               <mat-icon>
                 thumb_down_off_alt
               </mat-icon>
+              {{ movieLikesSummary.amountOfDislikes }}
             </button>
           </ng-template>
         </div>

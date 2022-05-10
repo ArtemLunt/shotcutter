@@ -1,4 +1,9 @@
+
 spring:
+  jpa:
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
   data:
     elasticsearch:
       repositories:
@@ -19,3 +24,11 @@ tmdb:
   integration:
     init: ${TMDB_INTEGRATION_INIT:false}
     delay: ${TMDB_INTEGRATION_DELAY:10000}
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              ReactiveMongoTemplate: DEBUG

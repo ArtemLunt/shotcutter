@@ -3,8 +3,9 @@ import {State, Action, StateContext, NgxsOnInit, Selector} from '@ngxs/store';
 import {UserService} from '@sc/user/user.service';
 import {IUser} from '@sc/user/user.interface';
 import {Injectable} from '@angular/core';
-import {tap} from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import { AuthFacadeService } from '@sc/auth';
 
 export class CurrentUserStateModel {
   currentUser: IUser;
@@ -33,11 +34,15 @@ export class CurrentUserState implements NgxsOnInit {
     return isAvatarUpdating;
   }
 
-  constructor(private _userService: UserService) {
+  constructor(private _userService: UserService, private _authService: AuthFacadeService) {
   }
 
   ngxsOnInit(ctx?: StateContext<any>): void {
-    ctx.dispatch(new LoadUserAction());
+    this._authService.isAuthenticated()
+      .pipe(filter(isAuthenticated => isAuthenticated))
+      .subscribe(() => {
+        ctx.dispatch(new LoadUserAction());
+      });
   }
 
   @Action(LoadUserAction)

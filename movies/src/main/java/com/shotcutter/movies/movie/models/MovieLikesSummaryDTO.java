@@ -7,8 +7,8 @@ import lombok.Data;
 @Builder
 public class MovieLikesSummaryDTO {
     private final Long relatedMovieId;
-    private final boolean likedByCurrentUser;
-    private final boolean dislikedByCurrentUser;
+    private final Boolean likedByCurrentUser;
+    private final Boolean dislikedByCurrentUser;
     private final Long amountOfLikes;
     private final Long amountOfDislikes;
 }

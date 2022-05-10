@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
 import { GenresState } from '@sc/genres';
 import { UserModule } from '@sc/user';
+import { AuthModule } from '@sc/auth';
 
 @NgModule({
   declarations: [
@@ -18,14 +19,15 @@ import { UserModule } from '@sc/user';
     MainComponent,
 
   ],
-  imports: [
-    NgxsModule.forFeature([GenresState]),
-    MainRoutingModule,
-    TypedFormsModule,
-    SharedModule,
-    PipesModule,
-    UserModule,
-  ]
+    imports: [
+        NgxsModule.forFeature([GenresState]),
+        MainRoutingModule,
+        TypedFormsModule,
+        SharedModule,
+        PipesModule,
+        UserModule,
+        AuthModule,
+    ]
 })
 export class MainModule {
 }

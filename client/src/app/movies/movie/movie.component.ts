@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MovieState } from '@sc/movies/movie/state/movie.state';
 import { IMovie, IMovieLikesSummary } from '@sc/movies';
 import { ActivatedRoute } from '@angular/router';
+import { AuthFacadeService } from '@sc/auth';
 import { Select, Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -20,6 +21,7 @@ export class MovieComponent {
   readonly movie$: Observable<IMovie>;
 
   constructor(
+    public readonly authService: AuthFacadeService,
     private readonly _store: Store,
     route: ActivatedRoute
   ) {

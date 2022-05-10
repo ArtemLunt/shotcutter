@@ -11,11 +11,11 @@ const routes: Routes = [
       {
         path: 'movie',
         loadChildren: () => import('@sc/movies').then(m => m.MoviesModule),
-        canActivate: [AuthGuard],
       },
       {
         path: 'profile',
-        loadChildren: () => import('@sc/profile').then(m => m.ProfileModule)
+        loadChildren: () => import('@sc/profile').then(m => m.ProfileModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'search',

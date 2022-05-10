@@ -61,8 +61,18 @@
           </button>
 
           <sc-user-info class="sc-header__section__item"
+                        *scIfAuthenticated="true"
                         (click)="showDetailsMenu = !showDetailsMenu">
           </sc-user-info>
+
+          <button class="sc-header__section__item"
+                  routerLink="/auth"
+                  *scIfAuthenticated="false"
+                  mat-icon-button>
+            <mat-icon>
+              login
+            </mat-icon>
+          </button>
         </div>
       </div>
     </mat-card-content>

@@ -1,9 +1,11 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
+import { AutoUnsubscribe } from '@sc/shared/decorators';
 
 @Directive({
   selector: '[scStopPropagation]'
 })
+@AutoUnsubscribe()
 export class StopPropagationDirective {
 
   private _sub: Subscription;
