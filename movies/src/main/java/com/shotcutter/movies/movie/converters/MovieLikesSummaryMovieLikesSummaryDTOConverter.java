@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieLikesSummaryMovieLikesSummaryDTOConverter implements Converter<MovieLikesSummary, MovieLikesSummaryDTO> {
-
     @Override
     public MovieLikesSummaryDTO convert(MovieLikesSummary movieLikesSummary) {
         return MovieLikesSummaryDTO
