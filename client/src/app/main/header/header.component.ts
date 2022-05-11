@@ -1,22 +1,22 @@
-import {
-  catchError,
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  mergeMap,
-  startWith,
-  switchMap
-} from 'rxjs/operators';
-import { SetThemeAction, Theme, THEME_ICONS, ThemeState } from '@sc/theme';
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { IMovieLookupDTO, MoviesService } from '@sc/movies';
+import { SetThemeAction, Theme, THEME_ICONS, ThemeState } from '@sc/theme';
 import {TypedFormBuilder, TypedFormControl} from '@sc/shared/typed-forms';
+import { IMovieLookupDTO, MoviesService } from '@sc/movies';
 import { NavigationStart, Router } from '@angular/router';
+import { AutoUnsubscribe } from '@sc/shared/decorators';
 import { omitNullishFields } from '@sc/shared/utils';
 import { SearchQueryParam } from '@sc/search';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngxs/store';
+import {
+  distinctUntilChanged,
+  debounceTime,
+  catchError,
+  startWith,
+  switchMap,
+  filter,
+  map,
+} from 'rxjs/operators';
 
 @Component({
   selector: 'sc-header',
@@ -24,6 +24,7 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@AutoUnsubscribe()
 export class HeaderComponent implements OnInit {
 
   readonly lookupKeyFormControl: TypedFormControl<string>;

@@ -7,6 +7,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Comparators, omitNullishFields } from '@sc/shared/utils';
 import { SearchState } from '@sc/search/state/search.state';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { AutoUnsubscribe } from '@sc/shared/decorators';
 import { IPage } from '@sc/shared/interfaces';
 import { Select, Store } from '@ngxs/store';
 import { GenresState } from '@sc/genres';
@@ -19,6 +20,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@AutoUnsubscribe()
 export class SearchComponent implements OnInit, OnDestroy {
 
   @Select(SearchState.searchResults)

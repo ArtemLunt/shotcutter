@@ -5,7 +5,7 @@ export enum SCApiEndpoints {
   // movies
   Genres = '/movies/genres',
   Movies = '/movies/movies',
-  Likes = '/movies/likes',
+  Likes = '/movies/likes/summary',
   Like = '/movies/likes/like',
   SearchMovies = '/movies/movies/search',
   LookupMovies = '/movies/movies/lookup',

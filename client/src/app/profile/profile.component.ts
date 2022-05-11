@@ -1,11 +1,12 @@
 import {UpdateUserAction, CurrentUserState, UpdateAvatarAction} from '@sc/user/state';
+import {delay, distinctUntilChanged, map, startWith} from 'rxjs/operators';
 import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import {TypedFormBuilder, TypedFormGroup} from '@sc/shared/typed-forms';
-import {catchError, delay, distinctUntilChanged, finalize, map, startWith} from 'rxjs/operators';
 import {IEditableUserPart, IUser, UserService} from '@sc/user';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { AutoUnsubscribe } from '@sc/shared/decorators';
 import {firstTruthy} from '@sc/shared/operators';
-import {combineLatest, Observable, throwError} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {Comparators} from '@sc/shared/utils';
 import {Select, Store} from '@ngxs/store';
 
@@ -15,6 +16,7 @@ import {Select, Store} from '@ngxs/store';
   styleUrls: ['./profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+@AutoUnsubscribe()
 export class ProfileComponent implements OnInit {
 
   get currentUser(): IUser {

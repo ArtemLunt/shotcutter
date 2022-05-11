@@ -13,13 +13,13 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JWTAuthManager authManager;
-    private final JWTAuthConverter authConverter;
-    private final RedirectStrategy redirectStrategy;
+    protected final JWTAuthManager authManager;
+    protected final JWTAuthConverter authConverter;
+    protected final RedirectStrategy redirectStrategy;
 
     public SecurityConfig(JWTAuthManager authManager,
-                          JWTAuthConverter authConverter,
-                          RedirectStrategy redirectStrategy) {
+                         JWTAuthConverter authConverter,
+                         RedirectStrategy redirectStrategy) {
         this.authManager = authManager;
         this.authConverter = authConverter;
         this.redirectStrategy = redirectStrategy;

@@ -1,4 +1,8 @@
 spring:
+  jpa:
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
   data:
     elasticsearch:
       repositories:

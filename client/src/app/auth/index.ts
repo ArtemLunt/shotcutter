@@ -1,4 +1,5 @@
 export * from './auth-page.guard';
+export * from './if-authenticated.directive';
 export * from './auth-provider.constants';
 export * from './auth-facade.service';
 export * from './auth-result.interface';

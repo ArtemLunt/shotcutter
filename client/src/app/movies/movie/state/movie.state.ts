@@ -1,11 +1,11 @@
-import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { DeleteLikeAction, LikeMovieAction, SetMovieLikesSummaryAction } from './movie.actions';
+import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { IMovieLikesSummary, MoviesService } from '@sc/movies';
-import { Injectable } from '@angular/core';
+import { increment } from '@sc/shared/store-operators';
 import { Observable, tap, throwError } from 'rxjs';
-import { IMovieLike } from '@sc/movies/movie-like.interface';
-import { patch } from '@ngxs/store/operators';
+import { iif, patch } from '@ngxs/store/operators';
 import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
 export class MovieStateModel {
   public likesSummary?: IMovieLikesSummary
@@ -40,19 +40,30 @@ export class MovieState {
   likeMovieAction(
     { getState, setState }: StateContext<MovieStateModel>,
     { relatedMovieId, value }: LikeMovieAction
-  ): Observable<IMovieLike> {
+  ): Observable<IMovieLikesSummary> {
     const initialState = getState().likesSummary;
 
     // optimistic update
     setState(patch({
       likesSummary: patch({
-        likedByCurrentUser: value === true,
-        dislikedByCurrentUser: value === false
+        likedByCurrentUser: value,
+        dislikedByCurrentUser: !value,
+        amountOfLikes: iif(
+          () => value,
+          increment(),
+          iif(() => initialState.likedByCurrentUser, increment(true))
+        ),
+        amountOfDislikes: iif(
+          () => !value,
+          increment(),
+          iif(() => initialState.dislikedByCurrentUser, increment(true))
+        )
       })
-    }))
+    }));
 
     return this._moviesService.likeMovie(relatedMovieId, value)
       .pipe(
+        tap(summary => setState(patch({ likesSummary: patch(summary) }))),
         // if something went wrong - rolling back the initial state
         catchError(err => {
           setState(patch({ likesSummary: initialState }));
@@ -65,19 +76,22 @@ export class MovieState {
   deleteLikeAction(
     { getState, setState }: StateContext<MovieStateModel>,
     { relatedMovieId }: DeleteLikeAction
-  ): Observable<void> {
+  ): Observable<IMovieLikesSummary> {
     const initialState = getState().likesSummary;
 
     // optimistic update
     setState(patch({
       likesSummary: patch({
         likedByCurrentUser: false,
-        dislikedByCurrentUser: false
+        dislikedByCurrentUser: false,
+        amountOfLikes: iif(initialState.likedByCurrentUser, increment(true)),
+        amountOfDislikes: iif(initialState.dislikedByCurrentUser, increment(true)),
       })
     }))
 
     return this._moviesService.deleteLike(relatedMovieId)
       .pipe(
+        tap(summary => setState(patch({ likesSummary: patch(summary) }))),
         // if something went wrong - rolling back the initial state
         catchError(err => {
           setState(patch({ likesSummary: initialState }));

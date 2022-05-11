@@ -2,14 +2,14 @@ import { SetMovieLikesSummaryAction } from '@sc/movies/movie/state/movie.actions
 import { IMovieLikesSummary } from '@sc/movies/movie-likes-summary.interface';
 import { MoviesService } from '@sc/movies/movies.service';
 import { IMovie } from '@sc/movies/movie.interface';
-import { Injectable } from '@angular/core';
 import { Observable, tap, zip } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngxs/store';
 import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Resolve,
 } from '@angular/router';
-import { Store } from '@ngxs/store';
 
 type MoviePageData = {
   movie: IMovie,
