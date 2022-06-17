@@ -35,7 +35,7 @@ jobs:
           npm install eslint @microsoft/eslint-formatter-sarif @angular-eslint/eslint-plugin
 
       - name: Run ESLint for a client application
-        run: cd client && npx eslint .
+        run: npx eslint client
           --config .eslintrc.json
           --ext .js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif 
