@@ -29,9 +29,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Enter the client app
-        run: cd client
-
       - name: Install ESLint
         run: |
           npm install eslint@8.10.0
