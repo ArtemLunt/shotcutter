@@ -29,13 +29,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install ESLint
+      - name: Install ESLint in the client application
+        working-directory: client
         run: |
-          cd client
           npm i eslint @microsoft/eslint-formatter-sarif @angular-eslint/eslint-plugin
 
       - name: Run ESLint for a client application
-        run: cd client && npx eslint .
+        working-directory: client
+        run: npx eslint .
           --config .eslintrc.json
           --ext .js,.jsx,.ts,.tsx
         continue-on-error: false
