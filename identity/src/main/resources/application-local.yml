@@ -1,0 +1,27 @@
+server:
+  port: 8082
+s3:
+  endpointUrl: http://localhost:4566
+  accessKeyId: root
+  secretKey: root
+  bucketName: shotcutter
+  region: russia
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
+  data:
+    mongodb:
+      username: mongo
+      password: root
+      host: localhost
+      authentication-database: admin
+      database: identity
