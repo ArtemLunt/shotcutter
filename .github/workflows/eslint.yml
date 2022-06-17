@@ -36,7 +36,7 @@ jobs:
 
       - name: Run ESLint for a client application
         run: npx eslint client
-          --config .eslintrc.json
+          --config client/.eslintrc.json
           --ext .js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif 
           --output-file eslint-results.sarif
