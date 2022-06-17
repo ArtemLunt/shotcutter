@@ -8,11 +8,11 @@ spring:
       repositories:
         enabled: true
     mongodb:
-      username: ${DB_USERNAME}
-      password: ${DB_PASSWORD}
-      host: ${DB_HOST}
-      authentication-database: ${DB_AUTH_DB}
-      database: ${DB_DB_NAME}
+      username: mongo
+      password: root
+      host: localhost
+      authentication-database: admin
+      database: shotcutter
   elasticsearch:
     rest:
       uris:
@@ -22,4 +22,4 @@ tmdb:
     key: ${TMDB_API_KEY}
   integration:
     init: ${TMDB_INTEGRATION_INIT:false}
-    delay: ${TMDB_INTEGRATION_DELAY:10000}
+    delay: 10000
