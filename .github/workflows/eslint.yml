@@ -38,8 +38,6 @@ jobs:
         run: cd client && npx eslint .
           --config .eslintrc.json
           --ext .js,.jsx,.ts,.tsx
-          --format @microsoft/eslint-formatter-sarif 
-          --output-file eslint-results.sarif
         continue-on-error: false
 
       - name: Upload analysis results to GitHub
