@@ -1,12 +1,11 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+cd ..
 
 for FOLDER in $(ls -d */ | grep -v "node_modules")
 do
 
   cd $FOLDER;
 
-  if test -f "package.json"; then
+  if test -f ".lintstagedrc.json"; then
     npm run precommit
   fi;
 
