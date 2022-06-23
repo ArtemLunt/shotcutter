@@ -1,4 +1,4 @@
-import {Theme} from '@sc/theme/theme.enum';
+import { Theme } from '@sc/theme/theme.enum';
 
 export const THEME_ICONS: Record<string, string> = {
   [Theme.Dark]: 'nights_stay',

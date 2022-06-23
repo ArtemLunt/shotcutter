@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class IfAuthenticatedDirective implements OnInit {
 
   @Input()
-  scIfAuthenticated: boolean = true;
+  scIfAuthenticated = true;
 
   private _embeddedViewRef: EmbeddedViewRef<any>;
 

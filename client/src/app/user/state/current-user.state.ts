@@ -67,7 +67,7 @@ export class CurrentUserState implements NgxsOnInit {
 
   @Action(UpdateAvatarAction)
   updateAvatar(
-    { patchState, getState }: StateContext<CurrentUserStateModel>,
+    { patchState }: StateContext<CurrentUserStateModel>,
     { avatar }: UpdateAvatarAction
   ): Observable<IUser> {
     patchState({ isAvatarUpdating: true });

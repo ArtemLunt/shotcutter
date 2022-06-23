@@ -1,4 +1,4 @@
-import {IEditableUserPart, IUser} from '@sc/user';
+import { IEditableUserPart, IUser } from '@sc/user';
 
 export class LoadUserAction {
   static readonly type = '[Current User] Load current user';

@@ -1,4 +1,4 @@
-import {IEnv} from '@sc/environments/environment.interface';
+import { IEnv } from '@sc/environments/environment.interface';
 
 export const environment: IEnv = {
   production: true,

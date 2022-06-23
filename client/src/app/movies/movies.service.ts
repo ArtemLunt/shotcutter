@@ -34,7 +34,7 @@ export class MoviesService {
 
   lookup(key: string): Observable<IMovieLookupDTO[]> {
     const params = new HttpParams().append(SearchQueryParam.Query, key);
-    return this._http.get<IMovieLookupDTO[]>(SCApiEndpoints.LookupMovies, {params});
+    return this._http.get<IMovieLookupDTO[]>(SCApiEndpoints.LookupMovies, { params });
   }
 
 }

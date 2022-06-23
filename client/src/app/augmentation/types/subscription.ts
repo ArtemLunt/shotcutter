@@ -1,5 +1,5 @@
-import {registerFor} from '@sc/augmentation';
-import {Subscription} from 'rxjs';
+import { registerFor } from '@sc/augmentation';
+import { Subscription } from 'rxjs';
 import 'rxjs';
 
 declare module 'rxjs' {

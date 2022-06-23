@@ -21,5 +21,5 @@ tmdb:
   api:
     key: ${TMDB_API_KEY}
   integration:
-    init: ${TMDB_INTEGRATION_INIT:false}
+    init: false
     delay: 10000

@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import com.shotcutter.movies.movie.services.GenreService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -15,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TMDBIntegrator {
 
     private final ConverterService converterService;
-    private final GenreService genreService;
+    private final TMDBGenresService genreService;
     private final TMDBService tmdbService;
 
     private final int pageSize;
@@ -24,7 +23,7 @@ public class TMDBIntegrator {
     private int currentPage;
 
     TMDBIntegrator(ConverterService converterService,
-                   GenreService genreService,
+                   TMDBGenresService genreService,
                    TMDBService tmdbService,
                    MovieService movieService
     ) {

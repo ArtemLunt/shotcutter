@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy, Input, HostListener, Output, EventEmitter} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'sc-file-drop-area',

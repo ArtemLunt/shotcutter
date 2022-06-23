@@ -1,7 +1,7 @@
-import {CurrentUserState} from '@sc/user/state';
-import {SharedModule} from '@sc/shared';
-import {NgModule} from '@angular/core';
-import {NgxsModule} from '@ngxs/store';
+import { CurrentUserState } from '@sc/user/state';
+import { SharedModule } from '@sc/shared';
+import { NgModule } from '@angular/core';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   declarations: [],

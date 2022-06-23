@@ -1,15 +1,11 @@
 import { SetMovieLikesSummaryAction } from '@sc/movies/movie/state/movie.actions';
 import { IMovieLikesSummary } from '@sc/movies/movie-likes-summary.interface';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { MoviesService } from '@sc/movies/movies.service';
 import { IMovie } from '@sc/movies/movie.interface';
 import { Observable, tap, zip } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Resolve,
-} from '@angular/router';
 
 type MoviePageData = {
   movie: IMovie,
@@ -27,7 +23,7 @@ export class MovieResolver implements Resolve<MoviePageData> {
   ) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<MoviePageData> {
+  resolve(route: ActivatedRouteSnapshot): Observable<MoviePageData> {
     return zip(
       this._moviesService.getById(route.params.id),
       this._moviesService

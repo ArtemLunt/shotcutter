@@ -16,7 +16,7 @@ export class SearchService {
 
   searchMovies(
     searchParams: ISearchParams,
-    page: number = 0,
+    page = 0,
   ): Observable<IPage<IMovie>> {
     const params = Object.entries(searchParams)
       .reduce(

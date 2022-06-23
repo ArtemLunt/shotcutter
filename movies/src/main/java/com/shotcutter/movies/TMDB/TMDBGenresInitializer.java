@@ -1,7 +1,7 @@
 package com.shotcutter.movies.TMDB;
 
-import com.shotcutter.movies.movie.services.GenreService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -11,12 +11,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
+@ConditionalOnProperty(value = "tmdb.integration.init")
 public class TMDBGenresInitializer {
 
-    private final GenreService genreService;
+    private final TMDBGenresService genreService;
     private final TMDBService tmdbService;
 
-    public TMDBGenresInitializer(GenreService genreService,
+    public TMDBGenresInitializer(TMDBGenresService genreService,
                                  TMDBService tmdbService) {
         this.genreService = genreService;
         this.tmdbService = tmdbService;

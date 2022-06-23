@@ -1,10 +1,10 @@
-import {State, Action, StateContext, NgxsOnInit, Selector} from '@ngxs/store';
-import {LoadCurrentUserAction} from '@sc/user/state/user.actions';
-import {UserService} from '@sc/user/user.service';
-import {IUser} from '@sc/user/user.interface';
-import {Injectable} from '@angular/core';
-import {tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { State, Action, StateContext, NgxsOnInit, Selector } from '@ngxs/store';
+import { LoadCurrentUserAction } from '@sc/user/state/user.actions';
+import { UserService } from '@sc/user/user.service';
+import { IUser } from '@sc/user/user.interface';
+import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export class UserStateModel {
   currentUser: IUser;
@@ -33,10 +33,10 @@ export class UserState implements NgxsOnInit {
 
   @Action(LoadCurrentUserAction)
   loadCurrentUser(
-    {patchState}: StateContext<UserStateModel>
+    { patchState }: StateContext<UserStateModel>
   ): Observable<IUser> {
     return this._userService.getCurrentUser()
-      .pipe(tap(currentUser => patchState({currentUser})));
+      .pipe(tap(currentUser => patchState({ currentUser })));
   }
 
 }

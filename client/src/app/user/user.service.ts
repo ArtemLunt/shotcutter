@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {SCApiEndpoints} from '@sc/shared/enums';
-import {IEditableUserPart, IUser} from '@sc/user/user.interface';
-import {environment} from '@sc/environments';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import { IEditableUserPart, IUser } from '@sc/user/user.interface';
+import { HttpClient } from '@angular/common/http';
+import { SCApiEndpoints } from '@sc/shared/enums';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +26,8 @@ export class UserService {
     return this._http.patch<IUser>(`${SCApiEndpoints.CurrentUser}/avatar`, formData);
   }
 
-  extractEditablePart({username}: IUser): IEditableUserPart {
-    return {username};
+  extractEditablePart({ username }: IUser): IEditableUserPart {
+    return { username };
   }
 
 }

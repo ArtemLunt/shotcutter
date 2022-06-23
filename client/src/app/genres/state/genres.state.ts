@@ -19,7 +19,7 @@ export class GenresStateModel {
 export class GenresState implements NgxsOnInit {
 
   @Selector()
-  static genres({genres}: GenresStateModel): string[] {
+  static genres({ genres }: GenresStateModel): string[] {
     return genres;
   }
 
@@ -33,10 +33,10 @@ export class GenresState implements NgxsOnInit {
   }
 
   @Action(LoadGenresAction)
-  loadGenres({patchState}: StateContext<GenresStateModel>): Observable<string[]> {
+  loadGenres({ patchState }: StateContext<GenresStateModel>): Observable<string[]> {
     return this._genresService.getGenres()
       .pipe(
-        tap(genres => patchState({genres}))
+        tap(genres => patchState({ genres }))
       );
   }
 

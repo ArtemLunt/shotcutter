@@ -1,8 +1,8 @@
-import {AuthFacadeService} from '@sc/auth/auth-facade.service';
+import { AuthFacadeService } from '@sc/auth/auth-facade.service';
 import { Injectable } from '@angular/core';
-import {catchError} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {EMPTY, Observable} from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { EMPTY, Observable } from 'rxjs';
 import {
   HttpInterceptor,
   HttpRequest,

@@ -1,5 +1,5 @@
-import {Type} from '@angular/core';
-import {Subscription} from 'rxjs';
+import { Type } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 /**
  * @description simple map, which contains all the registered subscriptions
@@ -21,7 +21,6 @@ export function registerFor(registerKey: any): any {
   }
 
   // here we're pushing the new subscription into the subscriptions array
-  // @ts-ignore
   subscriptionRegistry.get(registerKey).push(this as any);
 }
 
@@ -36,7 +35,7 @@ export function registerFor(registerKey: any): any {
  *
  * @see AutoUnsubscribe
  */
-export function AutoUnsubscribeSubscriptionRegistryProcessor<T = any>(): ClassDecorator {
+export function AutoUnsubscribeSubscriptionRegistryProcessor(): ClassDecorator {
   return (target: any) => {
     const targetClass: Type<any> = target;
     // here we're taking an original ngOnDestroy function to call it if it's already implemented
@@ -44,7 +43,7 @@ export function AutoUnsubscribeSubscriptionRegistryProcessor<T = any>(): ClassDe
 
     // wrapping up the ngOnDestroy hook to cleanup the subscriptions for current class instance
     targetClass.prototype.ngOnDestroy = function(): void {
-      if (!!originalDestroyFunction) {
+      if (originalDestroyFunction) {
         originalDestroyFunction.bind(this)();
       }
 

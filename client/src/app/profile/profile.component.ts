@@ -1,14 +1,14 @@
-import {UpdateUserAction, CurrentUserState, UpdateAvatarAction} from '@sc/user/state';
-import {delay, distinctUntilChanged, map, startWith} from 'rxjs/operators';
-import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
-import {TypedFormBuilder, TypedFormGroup} from '@sc/shared/typed-forms';
-import {IEditableUserPart, IUser, UserService} from '@sc/user';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { UpdateUserAction, CurrentUserState, UpdateAvatarAction } from '@sc/user/state';
+import { delay, distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { TypedFormBuilder, TypedFormGroup } from '@sc/shared/typed-forms';
+import { IEditableUserPart, IUser, UserService } from '@sc/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AutoUnsubscribe } from '@sc/shared/decorators';
-import {firstTruthy} from '@sc/shared/operators';
-import {combineLatest, Observable} from 'rxjs';
-import {Comparators} from '@sc/shared/utils';
-import {Select, Store} from '@ngxs/store';
+import { firstTruthy } from '@sc/shared/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { Comparators } from '@sc/shared/utils';
+import { Select, Store } from '@ngxs/store';
 
 @Component({
   selector: 'sc-profile',
@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
     private readonly _snackbar: MatSnackBar,
     private readonly _store: Store
   ) {
-    this.controlKeys = {username: 'username'};
+    this.controlKeys = { username: 'username' };
   }
 
   private static readonly AVAILABLE_AVATAR_TYPES: Set<string> = new Set<string>()
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser$
       .pipe(firstTruthy())
-      .subscribe(({username}) => {
+      .subscribe(({ username }) => {
         this.userInfoForm = this._formBuilder.group<IEditableUserPart>({
           username: [username]
         });

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { SetThemeAction, Theme, THEME_ICONS, ThemeState } from '@sc/theme';
-import {TypedFormBuilder, TypedFormControl} from '@sc/shared/typed-forms';
+import { TypedFormBuilder, TypedFormControl } from '@sc/shared/typed-forms';
 import { IMovieLookupDTO, MoviesService } from '@sc/movies';
 import { NavigationStart, Router } from '@angular/router';
 import { AutoUnsubscribe } from '@sc/shared/decorators';
@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
         map(key => key?.trim()),
         distinctUntilChanged(),
         switchMap(key => !key ? of([]) : moviesService.lookup(key)),
-        catchError(err => of([])),
+        catchError(() => of([])),
         startWith([])
       );
   }
@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit {
       .registerFor(this);
   }
 
-  openMoviePage({id}: IMovieLookupDTO): void {
+  openMoviePage({ id }: IMovieLookupDTO): void {
     this._router.navigateByUrl(`/home/movie/${id}`);
   }
 
@@ -88,7 +88,7 @@ export class HeaderComponent implements OnInit {
       [SearchQueryParam.Query]: this.lookupKeyFormControl.value
     });
 
-    this._router.navigate([`/home/search`], {queryParams});
+    this._router.navigate([`/home/search`], { queryParams });
   }
 
   switchTheme(): void {

@@ -1,6 +1,6 @@
-import {AuthComponent} from '@sc/auth/auth.component';
-import {RouterModule, Routes} from '@angular/router';
-import {NgModule} from '@angular/core';
+import { AuthComponent } from '@sc/auth/auth.component';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {

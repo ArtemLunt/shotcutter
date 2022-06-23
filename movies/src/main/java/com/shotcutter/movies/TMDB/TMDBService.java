@@ -4,6 +4,7 @@ import com.shotcutter.library.converter.ConverterService;
 import com.shotcutter.movies.movie.services.MovieService;
 import com.shotcutter.movies.movie.entities.db.MovieDBEntity;
 import com.shotcutter.movies.movie.entities.search.MovieSearchEntity;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,7 @@ import java.util.Collection;
 import java.util.Arrays;
 
 @Service
+@ConditionalOnProperty(value = "tmdb.integration.init")
 public class TMDBService {
     private final static String BASE_URL = "https://api.themoviedb.org/3";
     private final RestTemplate restTemplate;

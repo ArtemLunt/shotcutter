@@ -30,17 +30,17 @@ const defaults: SearchStateModel = {
 export class SearchState {
 
   @Selector()
-  static searchResults({searchResults}: SearchStateModel): IMovie[] {
+  static searchResults({ searchResults }: SearchStateModel): IMovie[] {
     return searchResults;
   }
 
   @Selector()
-  static currentPage({currentPage}: SearchStateModel): IPage<IMovie> {
+  static currentPage({ currentPage }: SearchStateModel): IPage<IMovie> {
     return currentPage;
   }
 
   @Selector()
-  static searchInProgress({searchInProgress}: SearchStateModel): boolean {
+  static searchInProgress({ searchInProgress }: SearchStateModel): boolean {
     return searchInProgress;
   }
 
@@ -49,11 +49,11 @@ export class SearchState {
 
   @Action(SearchAction)
   search(
-    {getState, setState}: StateContext<SearchStateModel>,
-    {searchParams}: SearchAction
+    { getState, setState }: StateContext<SearchStateModel>,
+    { searchParams }: SearchAction
   ): Observable<IPage<IMovie>> {
-    const {currentPage} = getState();
-    setState(patch({searchInProgress: true}));
+    const { currentPage } = getState();
+    setState(patch({ searchInProgress: true }));
 
     return this._searchService.searchMovies(
       searchParams,
@@ -71,7 +71,7 @@ export class SearchState {
 
   @Action(CleanSearchResultsAction)
   cleanSearchResults(
-    {setState}: StateContext<SearchStateModel>,
+    { setState }: StateContext<SearchStateModel>,
   ): void {
     setState(defaults);
   }

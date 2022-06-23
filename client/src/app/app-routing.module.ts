@@ -1,6 +1,6 @@
-import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard, AuthPageGuard} from '@sc/auth';
-import {NgModule} from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthPageGuard } from '@sc/auth';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {

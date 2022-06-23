@@ -1,4 +1,4 @@
-import {Theme} from '@sc/theme';
+import { Theme } from '@sc/theme';
 
 export class SetThemeAction {
   static readonly type = '[Theme] Set theme';

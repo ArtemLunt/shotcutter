@@ -1,10 +1,10 @@
-import {CanActivate, ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
-import {AuthResultQueryParamKey, AuthStatus, IAuthResult} from '@sc/auth/auth-result.interface';
-import {AuthFacadeService} from '@sc/auth/auth-facade.service';
-import {TokenService} from '@sc/auth/token.service';
-import {Injectable} from '@angular/core';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import { AuthResultQueryParamKey, AuthStatus, IAuthResult } from '@sc/auth/auth-result.interface';
+import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { AuthFacadeService } from '@sc/auth/auth-facade.service';
+import { TokenService } from '@sc/auth/token.service';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +18,7 @@ export class AuthPageGuard implements CanActivate {
   ) {
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this._authService.isAuthenticated()
       .pipe(
         map(isAuthenticated => {

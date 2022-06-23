@@ -1,5 +1,5 @@
-import {environment} from '@sc/environments/environment';
-import {HttpParam} from '@sc/shared/enums';
+import { environment } from '@sc/environments/environment';
+import { HttpParam } from '@sc/shared/enums';
 
 export type AuthProviderKey = 'google' | 'yandex';
 

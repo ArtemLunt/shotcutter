@@ -1,8 +1,8 @@
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import {AuthResultQueryParamKey} from '@sc/auth/auth-result.interface';
-import {AuthFacadeService} from '@sc/auth/auth-facade.service';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { AuthResultQueryParamKey } from '@sc/auth/auth-result.interface';
+import { AuthFacadeService } from '@sc/auth/auth-facade.service';
 import { Injectable } from '@angular/core';
-import {tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({

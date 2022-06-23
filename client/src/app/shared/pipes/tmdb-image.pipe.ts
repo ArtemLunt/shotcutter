@@ -7,7 +7,7 @@ export class TmdbImagePipe implements PipeTransform {
 
   private static readonly TMDB_IMAGE_BASE_URL: string = 'https://image.tmdb.org/t/p/w';
 
-  transform(path: string, width: number = 500): string {
+  transform(path: string, width = 500): string {
     return `${TmdbImagePipe.TMDB_IMAGE_BASE_URL}${width}/${path}`;
   }
 

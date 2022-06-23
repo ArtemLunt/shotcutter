@@ -1,5 +1,5 @@
-import {CookieKey} from '@sc/auth/cookie-key.enum';
-import {Injectable} from '@angular/core';
+import { CookieKey } from '@sc/auth/cookie-key.enum';
+import { Injectable } from '@angular/core';
 import * as Cookies from 'js-cookie';
 
 @Injectable({

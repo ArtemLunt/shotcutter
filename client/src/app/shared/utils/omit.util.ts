@@ -1,8 +1,8 @@
 export function omitNullishFields<T = any>(obj: T): Partial<T> {
-  return !!obj
+  return obj
     ? Object.fromEntries(
       Object.entries(obj)
-        .filter(([_, value]) => !!value)
+        .filter(([, value]) => !!value)
     ) as any
     : obj;
 }

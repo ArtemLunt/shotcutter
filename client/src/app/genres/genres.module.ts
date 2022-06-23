@@ -1,5 +1,4 @@
 import { GenresListComponent } from '@sc/genres/genres-list/genres-list.component';
-import { createConstProvider } from '@sc/shared/utils';
 import { RouterModule } from '@angular/router';
 import { SearchQueryParam } from '@sc/search';
 import { SharedModule } from '@sc/shared';

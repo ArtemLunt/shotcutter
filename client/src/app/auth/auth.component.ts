@@ -1,5 +1,5 @@
-import {AUTH_PROVIDERS_DATA, AuthProviderDataType} from '@sc/auth/auth-provider.constants';
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import { AUTH_PROVIDERS_DATA, AuthProviderDataType } from '@sc/auth/auth-provider.constants';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'sc-auth',
